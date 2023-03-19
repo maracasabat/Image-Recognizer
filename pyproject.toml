@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "image-recognizer"
+version = "0.1.0"
+description = ""
+authors = ["Ivan Yevpat <maracasabat@gmail.com>"]
+readme = "README.md"
+packages = [{include = "image_recognizer"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10, <3.11"
+tensorflow = "^2.11.0"
+django = "^4.1.7"
+django-tailwind = "^3.5.0"
+psycopg2-binary = "^2.9.5"
+django-dotenv = "^1.4.2"
+pillow = "^9.4.0"
+django-allauth = "^0.53.0"
+numpy = "^1.24.2"
+django-crispy-forms = "^2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
