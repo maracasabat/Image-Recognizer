@@ -4,16 +4,20 @@
 {#{% endblock %}#}
 {% block header %}
     <div class="flex gap-3">
-        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'upload' %}'>Simple Upload</a>
-        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'file_list' %}'>File Forms Upload</a>
-        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'book_list' %}'>Book Forms Upload</a>
-        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'photo_list' %}'>Photos Upload</a>
+        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'photo_list_cifar10' %}'>CIFAR-10 </a>
+        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'photo_list_cifar100' %}'>CIFAR-100 </a>
+        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'photo_list_chat_gpt' %}'>ChatGPT</a>
+        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'photo_list_image_generator' %}'>Image Generator</a>
     </div>
 
 {% endblock %}
 {% block content %}
 
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg" class="object-cover w-full"></img>
+
+<div>
+  <p>Welcome to the Image recognizer tool, the Product of NAAImage Recognizer Group :)</p>
+  <img class="object-scale-down h-148 w-196 ..." src="media/ml_models/model.png"  onclick="showModal(src)" >
+</div>
 
 
 {% endblock %}
