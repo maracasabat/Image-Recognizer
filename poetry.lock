@@ -310,13 +310,13 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-allauth"
-version = "0.53.0"
+version = "0.53.1"
 description = "Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication."
 category = "main"
 optional = false
 python-versions = ">=3.5"
 files = [
-    {file = "django-allauth-0.53.0.tar.gz", hash = "sha256:c8a32a1b163725e9e6b60dcd78e795cec749d68bd35003a33f7707c692928be2"},
+    {file = "django-allauth-0.53.1.tar.gz", hash = "sha256:1336f430d5797e7484dfddc6ddb1d5f61f04bb24a9519b64756847d089b2ffba"},
 ]
 
 [package.dependencies]
@@ -394,6 +394,17 @@ python-versions = "*"
 files = [
     {file = "flatbuffers-23.3.3-py2.py3-none-any.whl", hash = "sha256:5ad36d376240090757e8f0a2cfaf6abcc81c6536c0dc988060375fd0899121f8"},
     {file = "flatbuffers-23.3.3.tar.gz", hash = "sha256:cabd87c4882f37840f6081f094b2c5bc28cefc2a6357732746936d055ab45c3d"},
+]
+
+[[package]]
+name = "fontawesomefree"
+version = "6.3.0"
+description = "Font Awesome Free"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "fontawesomefree-6.3.0-py3-none-any.whl", hash = "sha256:92627e7585e1d7d113e147a8855bdacd9fc28a6b83a70ca9beb11fafe0da75b6"},
 ]
 
 [[package]]
@@ -1472,4 +1483,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10, <3.11"
-content-hash = "9c2abb2b5447765f854b0f32be716170cb815dde67388ea4da1877a4981b97cd"
+content-hash = "e81ee71f7d116bd8050ff8cb1c8f8596a411978757764b2b6d42b57aaddbe90a"
