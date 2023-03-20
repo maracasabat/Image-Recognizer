@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="flex-col items-center" style='align-items: center; justify-content: center; display: flex'>
+        <h2 class='flex font-bold text-3xl text-gray-900 tracking-tight uppercase mb-5'> Upload</h2>
+        <div class="flex">{% include 'mediauploadapp/includes/tabs.html' %}</div>
+    </div>
+{% endblock %}
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input class="text-gray-300 rounded-lg" type="file" name="document">
+    <button class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" type="submit">Upload file</button>
+  </form>
+
+  {% if url %}
+    <p class="text-gray-300">Uploaded file: <a href="{{ url }}">{{ url }}</a></p>
+  {% endif %}
+{% endblock %}

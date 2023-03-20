@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{#{% block title %}#}
+{#        {% include 'includes/headerGallery.html' %}#}
+{#{% endblock %}#}
+{% block header %}
+    <div class="flex gap-3">
+        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'upload' %}'>Simple Upload</a>
+        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'file_list' %}'>File Forms Upload</a>
+        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'book_list' %}'>Book Forms Upload</a>
+        <a class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" href='{% url 'photo_list' %}'>Photos Upload</a>
+    </div>
+
+{% endblock %}
+{% block content %}
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Flag_of_Ukraine.svg" class="object-cover w-full"></img>
+
+
+{% endblock %}

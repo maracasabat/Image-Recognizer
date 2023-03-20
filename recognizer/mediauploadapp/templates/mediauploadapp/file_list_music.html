@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="flex-col items-center" style='align-items: center; justify-content: center; display: flex'>
+        <h2 class='flex font-bold text-3xl text-gray-900 tracking-tight uppercase mb-5'> Files</h2>
+        <div class="flex">{% include 'mediauploadapp/includes/tabs.html' %}</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% block content_header %}
+    <p>
+        <a href="{% url 'upload_file' %}" class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 ">Upload file</a>
+    </p>
+  {% endblock %}
+    </div>
+  <table class=" my-10 h-px min-w-full text-center text-gray-300">
+    <thead class="border-b bg-gray-800">
+
+    <tr class="text-gray-300">
+          <td>
+            <a href="{% url 'file_list' %}" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" type="button">All Categories</a>
+          </td>
+          <td>
+            <a href="{% url 'file_list_image' %}" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" type="button"> Images</a>
+          </td>
+          <td>
+            <a href="{% url 'file_list_video' %}" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" type="button"> Videos</a>
+          </td>
+         <td>
+            <a href="{% url 'file_list_document' %}" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" type="button"> Documents</a>
+          </td>
+          <td>
+            <a href="{% url 'file_list_music' %}" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" type="button"> Musics</a>
+          </td>
+          <td>
+            <a href="{% url 'file_list_other' %}" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800" type="button">Others</a>
+          </td>
+        </tr>
+
+    </thead>
+  </table>
+  <div class="flex-col items-center" style='align-items: center; justify-content: center; display: flex'>
+    <h1 class="text-sm font-medium text-white px-6 py-4">
+      Hello <span class="animate-waving-hand">👋🏻</span>, here are your MUSIC files
+    </h1>
+  </div>
+  <hr class="my-10 h-px bg-opacity g-gray-200 dark:bg-opacity">
+  <table class="min-w-full text-center text-gray-300">
+    <thead class="border-b bg-gray-800">
+      <tr>
+        <th scope="col" class="text-sm font-medium text-white px-6 py-4">Title</th>
+        <th scope="col" class="text-sm font-medium text-white px-6 py-4">Category</th>
+        <th scope="col" class="text-sm font-medium text-white px-6 py-4">Publication date</th>
+        <th scope="col" class="text-sm font-medium text-white px-6 py-4">Download</th>
+        <th scope="col" class="text-sm font-medium text-white px-6 py-4">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for file in files_music %}
+        <tr class="text-gray-300">
+          <td>{{ file.title }}</td>
+          <td>{{ file.category }}</td>
+          <td>{{ file.publication_date }}</td>
+          <td>
+            <a class="pointer px-6 py-4 flex items-center justify-center text-green-600" href="{{ file.file.url }}" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+</svg>
+
+            </a>
+          </td>
+          <td class="text-center ">
+            <form method="post" action="{% url 'delete_file' file.pk %}">
+              {% csrf_token %}
+              <button class="pointer px-6 py-4 flex-inline items-center justify-center text-red-600" type="submit" ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+                  </svg></button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock %}

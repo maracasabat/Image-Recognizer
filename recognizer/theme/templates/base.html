@@ -1,0 +1,132 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link rel="icon" href="{% static 'images/favicon.svg' %}">
+    <title>My Book</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {% tailwind_css %}
+
+    <style media="screen">
+        .eyes {
+          position: relative;
+          width: 30px;
+          height: 30px;
+          background: transparent;
+          margin: -2px 0 0 0;
+          border-radius: 50%;
+            box-shadow: 0 5px 45px rgba(0, 0, 0, 0.5), inset 0 0 5px #6366f1, inset 0 0 15px #6366f1;
+          transition: border-radius 0.2s ease-in;
+        }
+
+        .eyesLogo {
+          position: relative;
+          width: 30px;
+          height: 30px;
+          background: white;
+          {#margin: -2px 0 0 0;#}
+          border-radius: 50%;
+            box-shadow: 0 5px 45px rgba(0, 0, 0, 0.5), inset 0 0 5px #6366f1, inset 0 0 15px #6366f1;
+          transition: border-radius 0.2s ease-in;
+        }
+
+        .eyesLogo::before {
+          content: '';
+          position: absolute;
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background: #273444;
+          box-shadow: 0 0 5px #f5d142;
+          transform: translate(5%, 5%);
+          border: 2px solid #f6e751;
+          box-sizing: border-box;
+        }
+
+        .eyes::before {
+          content: '';
+          position: absolute;
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background: #273444;
+          box-shadow: 0 0 5px #273444;
+          transform: translate(5%, 5%);
+          border: 2px solid #f7e852;
+          box-sizing: border-box;
+        }
+    </style>
+  </head>
+
+  <body>
+    <div class="min-h-full">
+      <!--    NAVIGATION-->
+
+ {% include 'includes/navigation.html' %}
+      <!--    HEADER-->
+      <header class="flex relative  bg-white shadow flex items-center ">
+        <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8 ">
+{#            {% block title %}{% endblock %}#}
+            {% block header %}{% endblock %}
+        <div class="flex flex-col absolute right-10 top-5 ">
+            {% include 'includes/messages.html' %}
+        </div>
+
+        </div>
+      </header>
+
+      <!--    DASHBOARD-->
+      <main class="bg-primary">
+        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+          <div class="px-4 sm:px-0">
+            <div class="h-full rounded-lg border-4 border-gray-200 flex items-center">
+              <div class="overflow-x-auto w-full h-full">
+                <div class="flex items-center justify-center font-sans overflow-hidden p-5">
+                    {% block tabs %}{% endblock %}
+                  {% block content %}{% endblock %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8"></div>
+      </main>
+    </div>
+
+     <script>
+        let links = document.querySelectorAll('.nav a');
+        links.forEach(link => {
+            const currentLink = document.URL;
+            const route = currentLink.split('/')[3];
+            const newsLink = document.querySelector('.news');
+            const bookLink = document.querySelector('.book');
+            const noteLink = document.querySelector('.note');
+
+            if (link.href === currentLink) {
+                link.classList.add('bg-gray-900');
+            }
+            if (route === 'newsapp') {
+                newsLink.classList.add('bg-gray-900');
+            }
+            if (route === 'book_app') {
+                bookLink.classList.add('bg-gray-900');
+            }
+            if (route === 'note_app') {
+                noteLink.classList.add('bg-gray-900');
+            }
+        });
+    </script>
+    <script>
+        let alert = document.querySelectorAll('.alert');
+        setTimeout(() => {
+            alert.forEach(alert => {
+                alert.style.display = 'none';
+            })
+        }, 1500);
+    </script>
+  <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+  </body>
+</html>
