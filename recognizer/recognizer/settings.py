@@ -38,9 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tailwind',
-    'theme',
+    'frontend',
     'django_browser_reload',
-    'main.apps.MainConfig',
     'users.apps.UsersConfig',
     'tinymce',
     'fontawesomefree',
@@ -167,7 +166,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #  Configuring Tailwind
 
-TAILWIND_APP_NAME = 'theme'
+TAILWIND_APP_NAME = 'frontend'
 
 INTERNAL_IPS = [
     "127.0.0.1",

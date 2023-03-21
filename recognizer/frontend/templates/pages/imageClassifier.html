@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Image Classifier{% endblock %}
+
+{% block content %}
+    <div class="flex flex-col justify-center align-center">
+        <h1 class='font-bold text-3xl flex justify-center align-center mb-5 text-red-600 tracking-tight uppercase'>Image Classifier</h1>
+    <div class='flex flex-col items-center justify-center'>
+        <form action='/' method='POST' enctype='multipart/form-data'>
+            {% csrf_token %}
+
+            <!-- Select Cifar10 Cifar-100 -->
+            <div class="mb-2">
+                <input  type="radio" id="cifar10" name="dataset" value="cifar10" checked>
+                <label for="cifar10" class="text-white">Cifar10</label>
+
+                <input type="radio"  id="cifar100" name="dataset" value="cifar100">
+                <label for="cifar100" class="text-white">Cifar100</label>
+            </div>
+
+           <!-- Dropzone -->
+            {% include 'includes/dropzone.html' %}
+
+
+        </form>
+        {% if prediction %}
+            <div class='flex flex-col items-center justify-center'>
+                <h2 class='font-bold text-2xl flex text-red-600 tracking-tight uppercase'>Prediction</h2>
+                <p class='font-bold text-2xl flex text-red-600 tracking-tight uppercase'>{{ prediction }}</p>
+            </div>
+    </div>
+        {% endif %}
+{% endblock %}

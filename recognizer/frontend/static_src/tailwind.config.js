@@ -8,14 +8,14 @@
 module.exports = {
     //  purge: {
     //     enabled: true,
-    //     content: ['theme/templates/base.html'],
+    //     content: ['frontend/templates/base.html'],
     // },
     content: [
         /**
          * HTML. Paths to Django template files that will contain Tailwind CSS classes.
          */
 
-        /*  Templates within theme app (<tailwind_app_name>/templates), e.g. base.html. */
+        /*  Templates within frontend app (<tailwind_app_name>/templates), e.g. base.html. */
         '../templates/**/*.html',
 
         /*
