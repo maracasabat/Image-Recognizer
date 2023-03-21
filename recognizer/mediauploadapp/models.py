@@ -49,9 +49,22 @@ class Book(models.Model):
 
 
 class Photo(models.Model):
+    CATEGORY = (
+        ('airplane', ('Airplane')),
+        ('automobile', ('Automobile')),
+        ('bird', ('Bird')),
+        ('cat', ('Cat')),
+        ('deer', ('Deer')),
+        ('dog', ('Dog')),
+        ('frog', ('Frog')),
+        ('horse', ('Horse')),
+        ('ship', ('Ship')),
+        ('truck', ('Truck')),
+    )
     title = models.CharField(max_length=255, blank=True)
     file = models.FileField(upload_to='photos/',
                             validators=[FileExtensionValidator(allowed_extensions=['jpg', 'png', 'svg', 'jpeg'])])
+    category = models.CharField('Image Category', max_length=40, choices=CATEGORY, default='other')
     uploaded_at = models.DateTimeField(auto_now_add=True)
     author_id = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
 

@@ -21,6 +21,11 @@ urlpatterns = [
 
     path('class/books/upload/', views.UploadBookView.as_view(), name='class_upload_book'),
 
+    path('photos_cifar10/', views.photo_list, name='photo_list_cifar10'),
+    path('photos_cifar100/', views.photo_list, name='photo_list_cifar100'),
+    path('photos_chat_gpt/', views.photo_list, name='photo_list_chat_gpt'),
+    path('photos_image_generator/', views.photo_list, name='photo_list_image_generator'),
+
     path('photos/', views.photo_list, name='photo_list'),
     path('photos/clear/', views.clear_database, name='clear_database'),
     path('photos/<int:pk>/', views.delete_photo, name='delete_photo'),

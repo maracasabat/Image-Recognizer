@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block header %}
+    <div class="flex-col items-center" style='align-items: center; justify-content: center; display: flex'>
+        <h2 class='flex font-bold text-3xl text-gray-900 tracking-tight uppercase mb-5'> Photos</h2>
+        <div class="flex">{% include 'mediauploadapp/includes/tabs.html' %}</div>
+    </div>
+{% endblock %}
+{% block content %}
+
+
+
+    {% csrf_token %}
+
+
+
+<div class=" flex flex-col justify-center items-center gap-3">
+  <div class="row text-accent flex flex-col">
+    <div class="col-md-3">
+      <div class="flex justify-center">
+          <div class="list-group  text-accent flex flex-col">
+            <a href="#!" aria-current="true" class=" block text-center px-6 py-2 border-b border-gray-200 w-full rounded-t-lg text-white cursor-pointer bg-gray-800" >
+                Possible Actions
+            </a>
+            <a href="{% url 'basic_upload' %}" class=" block text-center px-6 py-2 border-b border-gray-200 w-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:bg-gray-200 focus:text-gray-600 transition duration-500 cursor-pointer ">
+                Basic Photo Upload
+            </a>
+            <a href="{% url 'progress_bar_upload' %}" class="block text-center px-6 py-2 border-b border-gray-200 w-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:bg-gray-200 focus:text-gray-600 transition duration-500 cursor-pointer " >
+                Progress Bar Upload
+            </a>
+
+            <a href="{% url 'drag_and_drop_upload' %}" class="block text-center px-6 py-2 border-b border-gray-200 w-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-0 focus:bg-gray-200 focus:text-gray-600 transition duration-500 cursor-pointer " >
+                Drag and Drop Photo Upload
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      {% block photos_content %}
+      {% endblock %}
+    </div>
+  </div>
+{#</div>#}
+  <form method="post" action="{% url 'clear_database' %}">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.path }}">
+    <button type="submit" class="text-white px-5 py-2 mt-5 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400" >
+      Clear Database
+    </button>
+  </form>
+</div>
+
+{% endblock %}
