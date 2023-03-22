@@ -18,6 +18,7 @@ django-allauth = "^0.53.0"
 numpy = "^1.24.2"
 fontawesomefree = "^6.3.0"
 django-crispy-forms = "1.14.0"
+django-email-users = "^1.1.0"
 
 
 [build-system]
