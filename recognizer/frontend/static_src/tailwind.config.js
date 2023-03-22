@@ -48,8 +48,10 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'primary': '#1f2937',
-                'secondary': '#1845ad',
+                // 'primary': '#1f2937',
+                'primary': '#202123',
+                // 'secondary': '#1845ad',
+                'secondary': '#343541',
                 'accent': '#f09819',
                 'eye': '#f5d142',
                 'eyeShadow': '#6366f1',

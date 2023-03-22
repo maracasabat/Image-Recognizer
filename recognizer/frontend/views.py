@@ -21,3 +21,8 @@ def image_generator(request):
 @login_required
 def settings_page(request):
     return render(request, "pages/settings.html")
+
+
+@login_required
+def team(request):
+    return render(request, "pages/team.html")

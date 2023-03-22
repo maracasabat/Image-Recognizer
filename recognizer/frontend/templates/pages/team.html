@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container px-6 mx-auto bg-white  ">
+
+  <!-- Section: Design Block -->
+  <section class="mb-32 text-gray-800 text-center">
+    <h2 class="text-3xl font-bold mb-12">Meet the team</h2>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-x-6 lg:gap-xl-12">
+      <div class="mb-12 lg:mb-0">
+        <img class="rounded-lg shadow-lg mb-6 mx-auto" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
+          alt="avatar" style="width: 150px" />
+        <h5 class="text-lg font-bold mb-4">Alan Turing</h5>
+        <p class="mb-6">Frontend Developer</p>
+        <ul class="list-inside flex mx-auto justify-center">
+          <a href="#" class="px-2">
+
+              {%  include "includes/icons/github.svg" %}
+
+          </a>
+          <a href="#" class="px-2 text-blueberry">
+
+            {%  include "includes/icons/telegram.svg" %}
+
+          </a>
+          <a href="#!" class="px-2">
+
+              {%  include "includes/icons/linkedin.svg" %}
+
+          </a>
+        </ul>
+      </div>
+      <div class="mb-12 lg:mb-0">
+        <img class="rounded-lg shadow-lg mb-6 mx-auto" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(4).jpg"
+          alt="avatar" style="width: 150px" />
+        <h5 class="text-lg font-bold mb-4">Veronica Smith</h5>
+        <p class="mb-6">Backend Developer</p>
+        <ul class="list-inside flex mx-auto justify-center">
+          <a href="#!" class="px-2">
+
+              {%  include "includes/icons/github.svg" %}
+
+          </a>
+          <a href="#!" class="px-2">
+
+              {%  include "includes/icons/telegram.svg" %}
+
+          </a>
+          <a href="#!" class="px-2">
+
+              {%  include "includes/icons/linkedin.svg" %}
+
+          </a>
+        </ul>
+      </div>
+      <div class="mb-12 md:mb-0">
+        <img class="rounded-lg shadow-lg mb-6 mx-auto" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(32).jpg"
+          alt="avatar" style="width: 150px" />
+        <h5 class="text-lg font-bold mb-4">Tom Johnson</h5>
+        <p class="mb-6">Digital Marketing Analyst</p>
+        <ul class="list-inside flex mx-auto justify-center">
+          <a href="#!" class="px-2">
+
+            {%  include "includes/icons/github.svg" %}
+
+          </a>
+          <a href="#!" class="px-2">
+
+              {%  include "includes/icons/telegram.svg" %}
+
+          </a>
+          <a href="#" class="px-2">
+
+                  {%  include "includes/icons/linkedin.svg" %}
+          </a>
+        </ul>
+      </div>
+      <div class="mb-12 md:mb-0">
+        <img class="rounded-lg shadow-lg mb-6 mx-auto" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg"
+          alt="avatar" style="width: 150px" />
+        <h5 class="text-lg font-bold mb-4">Emma Lovelace</h5>
+        <p class="mb-6">Web Designer</p>
+        <ul class="list-inside flex mx-auto justify-center">
+          <a href="#!" class="px-2">
+
+                {%  include "includes/icons/github.svg" %}
+
+          </a>
+          <a href="#!" class="px-2">
+
+                {%  include "includes/icons/telegram.svg" %}
+
+          </a>
+          <a href="#!" class="px-2">
+
+                    {%  include "includes/icons/linkedin.svg" %}
+          </a>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- Section: Design Block -->
+
+</div>
+{% endblock %}

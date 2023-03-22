@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <!--Stylesheet-->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/slider.css' %}">
@@ -15,13 +16,13 @@
 
 </head>
 <body >
-<div class="flex  w-full h-screen ">
-    <div class="flex w-1/2 justify-center bg-accent" style="width: 50%">
-        {% include 'includes/slider.html' %}
-    </div>
-    <div class="relative flex w-1/2 justify-center bg-primary" style="width: 50%">
+<div class="flex  w-full h-screen bg-[#343541] bg-[url({% static 'images/blue-bg.avif' %})] bg-cover bg-no-repeat bg-center">
+    <div class='min-w-full sm:w-2/3 md:w-1/2'>
         {% block content %}{% endblock %}
     </div>
+{#    <div class="flex w-1/2 justify-center" style="width: 50%">#}
+{#        {% include 'includes/slider.html' %}#}
+{#    </div>#}
 </div>
 </body>
 </html>

@@ -6,13 +6,13 @@
     box-sizing: border-box;
 }
 body{
-    background-color: #1f2937;
+    background-color: #202123;
 }
 
 form{
     height: min-content;
-    width: 420px;
-    background-color: #1f2937;
+    width: 100%;
+    /*background-color: #1f2937;*/
     position: absolute;
     transform: translate(-50%,-50%);
     top: 50%;
