@@ -24,4 +24,4 @@ class PhotoForm(forms.ModelForm):
     file = forms.FileField(required=True, validators=[file_size])
     class Meta:
         model = Photo
-        fields = ('file', 'category', )
+        fields = ('file',)
