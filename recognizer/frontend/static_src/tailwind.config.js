@@ -6,6 +6,7 @@
  */
 
 module.exports = {
+    darkMode: "class",
     //  purge: {
     //     enabled: true,
     //     content: ['frontend/templates/base.html'],
@@ -48,8 +49,10 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                // 'primary': '#1f2937',
-                'primary': '#202123',
+                'primary-dark':'#1f2937',
+                'primary-light':'#343541',
+                'primary': '#1f2937',
+                // 'primary': '#202123',
                 // 'secondary': '#1845ad',
                 'secondary': '#343541',
                 'accent': '#f09819',

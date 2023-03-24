@@ -3,27 +3,29 @@
 <html lang="en">
 <head>
   <!-- Design by foolishdeveloper.com -->
-    <title>My Finance</title>
+    <title>NAAI</title>
 
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">#}
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
     <!--Stylesheet-->
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/slider.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
      {% tailwind_css %}
 
 </head>
 <body >
-<div class="flex  w-full h-screen bg-[#343541] bg-[url({% static 'images/blue-bg.avif' %})] bg-cover bg-no-repeat bg-center">
-    <div class='min-w-full sm:w-2/3 md:w-1/2'>
+<div class="flex  w-full h-screen relative" style="background-image: url({% static 'images/bg-green-4.jpeg' %}) ; background-size: cover; background-repeat: no-repeat; background-position: center center; ">
+        <canvas class="absolute inset-0 z-10 w-full h-screen"  id="spider"></canvas>
+{#<div class="flex  w-full h-screen bg-primary" style="background-image: url({% static 'images/bg_image.webp' %}) ; background-size: cover; background-repeat: no-repeat; background-position: center center; ">#}
+
+    <div class="relative flex w-full md:w-1/2 justify-center ">
+    </div>
+    <div class="hidden md:flex md:w-1/2 justify-center relative z-20">
         {% block content %}{% endblock %}
     </div>
-{#    <div class="flex w-1/2 justify-center" style="width: 50%">#}
-{#        {% include 'includes/slider.html' %}#}
-{#    </div>#}
 </div>
+<script type="text/javascript" src="{% static 'js/spider.js' %}"></script>
 </body>
 </html>
 
