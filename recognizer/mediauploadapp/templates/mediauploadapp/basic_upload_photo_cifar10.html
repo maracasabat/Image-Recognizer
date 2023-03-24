@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="flex-col items-center" style='align-items: center; justify-content: center; display: flex'>
+        <h2 class='flex font-bold text-3xl text-gray-900 tracking-tight uppercase mb-5'> CIFAR-10 Image recognizer</h2>
+        <div class="flex">{% include 'mediauploadapp/includes/tabs.html' %}</div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+{% block javascript %}
+    {% load static %}
+  {# JQUERY FILE UPLOAD SCRIPTS #}
+  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+
+  {# PHOTOS PAGE SCRIPTS #}
+  <script src="{% static 'mediauploadapp/js/basic-upload-photo.js' %}"></script>
+{% endblock %}
+
+{% block photos_content %}
+    <section class="u-clearfix u-container-align-center u-section-1" id="sec-4aa5">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-container-style u-group u-white u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <h1 class='flex font-bold text-3xl text-gray-900 tracking-tight mb-5'> How it works?</h1>
+            <p class="u-text u-text-default u-text-2">
+              <span class="u-text-body-color"> Just load the picture that could be a part of the 10 categories:</span>
+              <span style="font-weight: 700;">
+                <br>
+              </span>-&nbsp;'airplane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'<br>-&nbsp;check if our classifier recognized your pictures correctly
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </section>
+    <table class="flex justify-center	table-layout: auto;">
+        <thead>
+            <tr>
+              <th>
+                  <div class="u-container-layout u-similar-container u-container-layout-1">
+                    <h3 class="u-align-center u-text u-text-default u-text-3">  You can download photo and use it directly for the image recognition:</h3>
+                    <div style="margin-bottom: 20px;">
+                        <label class="inline-block mb-2 text-gray-500">Upload Image(jpg,png,svg,jpeg)</label>
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="file" name="file" id="fileupload" data-url="{% url 'basic_upload' %}">
+                            <button class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" type="submit">Upload a photo</button>
+                        </form>
+                    </div>
+                  </div>
+              </th>
+            </tr>
+            <tr>
+              <th>
+                  <div class="u-container-layout u-similar-container u-container-layout-2">
+                  <h3 class="u-align-center u-text u-text-default u-text-3"> Choose from the existing photos:</h3>
+                    <div class="relative inline-block text-left">
+                        <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                          Select an option
+                          <!-- Add an arrow icon to indicate that the button opens a dropdown menu -->
+                          <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414-1.414L13.586 10H4a1 1 0 010-2h9.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                          </svg>
+                        </button>
+                    </div>
+                    <!-- Create a dropdown menu that is hidden by default -->
+                    <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                       {% for photo in photos %}
+                           <div class="py-1" role="none">
+                                {{ photo.file.url }}
+                           </div>
+                       {% endfor %}
+                    </div>
+
+                    {% for photo in photos %}
+                        <tr>
+                          <td><a class = "text-gray-500" href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>
+                          <td class="text-center ">
+                            <form method="post" action="{% url 'predict_photo_dropdown' photo.pk %}">
+                              {% csrf_token %}
+                              <button class="pointer px-6 py-4 flex-inline items-center justify-center text-red-600" type="submit" ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
+                                  </svg></button>
+                            </form>
+                          </td>
+                        </tr>
+                      {% endfor %}
+
+                  </div>
+              </th>
+            </tr>
+            <tr>
+              <th>
+                  <div class="u-container-layout u-similar-container u-container-layout-3">
+                      <form method="post" action="{% url 'photo_list' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button type="submit" class="text-white px-5 py-2 mt-5 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400" >
+                               Show all my photos
+                            </button>
+                      </form>
+                 </div>
+              </th>
+            </tr>
+        </thead>
+    </table>
+    </div>
+
+{##}
+{##}
+{#  <form method="post" action="{% url 'photo_list' %}">#}
+{#        {% csrf_token %}#}
+{#        <input type="hidden" name="next" value="{{ request.path }}">#}
+{#        <button type="submit" class="text-white px-5 py-2 mt-5 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400" >#}
+{#          Show all my photos#}
+{#        </button>#}
+{#  </form>#}
+{##}
+{#  <div style="margin-bottom: 20px;">#}
+{#  <label class="inline-block mb-2 text-gray-500">Upload Image(jpg,png,svg,jpeg)</label>#}
+{#  <form method="post" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{#    <input type="file" name="file" id="fileupload" data-url="{% url 'basic_upload' %}">#}
+{#    <button class="text-white px-5 py-2 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400 transition" type="submit">Upload a photo</button>#}
+{#  </form>#}
+{#  </div>#}
+{##}
+{#  </div>#}
+{#  <table id="gallery" class="min-w-full text-center">#}
+{#    <thead class="border-b bg-gray-800 ">#}
+{#      <tr>#}
+{#        <th scope="col" class="text-sm flex-bold text-white px-7 py-5 text-2xl ">All Photos</th>#}
+{#      </tr>#}
+{#    </thead>#}
+{#    <tbody >#}
+{#      {% for photo in photos %}#}
+{##}
+{#          <!-- Image gird -->#}
+{#        <div class="p-4 grid grid-cols-4 gap-4 ">#}
+{##}
+{#            <div>#}
+{#                <img class="w-full h-full object-cover cursor-pointer"#}
+{#                 src="{{ photo.file.url }}" alt="Flower"#}
+{#            onclick="showModal(src)" />#}
+{#            </div>#}
+{##}
+{#        </div>#}
+{##}
+{#        <tr>#}
+{#          <td><a class = "text-gray-500" href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>#}
+{#          <td class="text-center ">#}
+{#            <form method="post" action="{% url 'delete_photo' photo.pk %}">#}
+{#              {% csrf_token %}#}
+{#              <button class="pointer px-6 py-4 flex-inline items-center justify-center text-red-600" type="submit" ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">#}
+{#                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m6 4.125l2.25 2.25m0 0l2.25 2.25M12 13.875l2.25-2.25M12 13.875l-2.25 2.25M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />#}
+{#                  </svg></button>#}
+{#            </form>#}
+{#          </td>#}
+{#        </tr>#}
+{#      {% endfor %}#}
+{#    </tbody>#}
+{##}
+{#  </table>#}
+{#      <!-- The Modal -->#}
+{#    <div id="modal"#}
+{#        class="hidden fixed top-0 left-0 z-80 w-screen h-screen bg-black/70 flex justify-center items-center">#}
+{##}
+{#        <!-- The close button -->#}
+{#        <a class="fixed z-90 top-6 right-8 text-white text-5xl font-bold" href="javascript:void(0)"#}
+{#            onclick="closeModal()">&times;</a>#}
+{##}
+{#        <!-- A big image will be displayed here -->#}
+{#        <img id="modal-img" class="max-w-[800px] max-h-[600px] object-cover" />#}
+{#    </div>#}
+{##}
+{#    <script>#}
+{#        // Get the modal by id#}
+{#        var modal = document.getElementById("modal");#}
+{##}
+{#        // Get the modal image tag#}
+{#        var modalImg = document.getElementById("modal-img");#}
+{##}
+{#        // this function is called when a small image is clicked#}
+{#        function showModal(src) {#}
+{#            modal.classList.remove('hidden');#}
+{#            modalImg.src = src;#}
+{#        }#}
+{##}
+{#        // this function is called when the close button is clicked#}
+{#        function closeModal() {#}
+{#            modal.classList.add('hidden');#}
+{#        }#}
+{#    </script>#}
+{#     <form method="post" action="{% url 'clear_database' %}">#}
+{#        {% csrf_token %}#}
+{#        <input type="hidden" name="next" value="{{ request.path }}">#}
+{#        <button type="submit" class="text-white px-5 py-2 mt-5 border-2 border-lip rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-400 hover:bg-gradient-to-l hover:from-indigo-600 hover:to-indigo-400" >#}
+{#          Clear Database#}
+{#        </button>#}
+{#    </form>#}
+{% endblock %}
+
+{% endblock %}
