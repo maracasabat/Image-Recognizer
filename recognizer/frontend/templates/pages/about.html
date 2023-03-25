@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    <h1 class='text-3xl font-bold'> CNN Model </h1>
+{% endblock %}
+
+{% block content %}
+
+    <article class='max-w-4xl mx-auto mt-5 space-y-4'>
+        <div class='space-y-2 text-lg leading-relaxed overflow-auto'>
+            <p>
+                This is a project to implement the Convoluted Neural Network with 97% accuracy in the Django application, for visual confirmation of network predictions
+            </p>
+            <p>
+                In an ordinary perceptron, which is a fully connected neural network, each neuron is connected to all the neurons of the previous layer, each with a personal weight. In the convolutional neural network, the convolution operation uses only a limited matrix of weights of small size, which is «moved» along the entire layer being processed (at the very beginning - directly from the input image)by forming an activation signal after each shift for the neuron of the next layer with the same position. That is, different neurons in the output layer use the same weight matrix, which is also called the convolution core. It is interpreted as the visual encoding of a feature, such as having an inclined line at a certain angle. Then the next layer produced by the convolution operation of such a weighting matrix shows the presence of this feature in the layer being treated and its coordinates, forming the so-called feature map
+            </p>
+            <p class="text-bold my-5">
+                The concepts used in the network are:
+            </p>
+            <ul class='list-disc list-inside '>
+                <li>Increasing Data Logging (DATA AUGMENTATION) is a strategy that allows you to significantly increase the variety of data available for training models without collecting new data. The training uses data enhancement techniques such as trimming, filling and horizontal reflection.</li>
+                <li>Normalization: Batch normalization (BATCH-NORMALIZATION) is a method for increasing artificial neural networks' speed, performance, and stability. It normalises the input layer by re-centring and scaling the image.</li>
+            </ul>
+        </div>
+
+
+{% endblock %}
+

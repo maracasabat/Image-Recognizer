@@ -1,7 +1,7 @@
 {% extends 'auth/index.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <form  method="post">
+    <form  method="post" class="bg-transparent">
     {% csrf_token %}
         <h3>Register</h3>
         {{ form|crispy }}
