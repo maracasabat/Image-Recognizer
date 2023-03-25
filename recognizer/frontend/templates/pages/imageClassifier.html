@@ -1,33 +1,36 @@
 {% extends "base.html" %}
 
-{% block title %}Image Classifier{% endblock %}
+{% block title %}
+    <h1 class='text-3xl font-bold'>Image Classifier</h1>
+{% endblock %}
 
 {% block content %}
     <div class="flex flex-col justify-center align-center">
-        <h1 class='font-bold text-3xl flex justify-center align-center mb-5 text-red-600 tracking-tight uppercase'>Image Classifier</h1>
-    <div class='flex flex-col items-center justify-center'>
-        <form action='/' method='POST' enctype='multipart/form-data'>
-            {% csrf_token %}
+        <div class='flex flex-col md:flex-row items-center justify-center'>
 
             <!-- Select Cifar10 Cifar-100 -->
-            <div class="mb-2">
-                <input  type="radio" id="cifar10" name="dataset" value="cifar10" checked>
-                <label for="cifar10" class="text-white">Cifar10</label>
+            <div class="mb-2 p-5 w-full md:w-1/2 border border-red-500 ">
+                    <input  type="radio" id="cifar10" name="dataset" value="cifar10" checked>
+                    <label for="cifar10" class="text-primary dark:text-white">Cifar10</label>
 
-                <input type="radio"  id="cifar100" name="dataset" value="cifar100">
-                <label for="cifar100" class="text-white">Cifar100</label>
+                    <input type="radio"  id="cifar100" name="dataset" value="cifar100">
+                    <label for="cifar100" class="text-primary dark:text-white">Cifar100</label>
+
+                <form action='upload/' method='POST' enctype='multipart/form-data'  id="my-awesome-dropzone" class="dropzone w-full h-[250px] text-gray-800 rounded-lg  opacity-50 ">
+                    {% csrf_token %}
+
+                   <!-- Dropzone -->
+                     <div class="fallback">
+                        <input name="file" type="file" multiple />
+                    </div>
+
+                </form>
             </div>
 
-           <!-- Dropzone -->
-            {% include 'includes/dropzone.html' %}
-
-
-        </form>
-        {% if prediction %}
-            <div class='flex flex-col items-center justify-center'>
-                <h2 class='font-bold text-2xl flex text-red-600 tracking-tight uppercase'>Prediction</h2>
-                <p class='font-bold text-2xl flex text-red-600 tracking-tight uppercase'>{{ prediction }}</p>
+            <div class="w-full  p-5 md:w-1/2 border border-red-500">
+                PREDICTION
             </div>
+        </div>
     </div>
-        {% endif %}
+
 {% endblock %}

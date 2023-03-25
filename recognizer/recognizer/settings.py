@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'dropzone.apps.DropzoneConfig'
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'

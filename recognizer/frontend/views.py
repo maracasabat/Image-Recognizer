@@ -15,11 +15,6 @@ def image_classifier(request):
 
 
 @login_required
-def image_generator(request):
-    return render(request, "pages/imageGenerator.html")
-
-
-@login_required
 def settings_page(request):
     return render(request, "pages/settings.html")
 
@@ -27,6 +22,7 @@ def settings_page(request):
 @login_required
 def team(request):
     return render(request, "pages/team.html")
+
 
 def change_theme(request, **kwargs):
     if 'is_dark_theme' in request.session:

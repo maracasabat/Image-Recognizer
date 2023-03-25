@@ -4,71 +4,58 @@
   <head>
     <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link rel="icon" href="{% static 'images/favicon.svg' %}">
-    <title>NAAI</title>
-
-    {% tailwind_css %}
-
+      <link rel="icon" href="{% static 'images/favicon-3.png' %}">
+      <title>NAAI</title>
+      <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+      <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+     {% load static %}
+      {% tailwind_css %}
   </head>
 
-  <body>
-    <div class="min-h-full">
-     <!--  AUTH  -->
-     {% block auth %}{% endblock %}
-      <!--    NAVIGATION  -->
+  <body class="h-full text-bg-gray-600  dark:text-gray-50 bg-gradient-to-br dark:from-[#012210] dark:to-[#009c4c] from-[#9dc9b3] to-white">
+{#        style={% if is_dark_theme %}#}
+{#            "background-image: url({% static 'images/bg_green_4.jpeg' %}); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; backdrop-filter: blur(10px);"#}
+{#       {% endif %}>#}
 
+  <div class="min-h-screen overflow-auto  ">
+{#        style={% if is_dark_theme %}#}
+{#            "background-image: url({% static 'images/bg_green_4.jpeg' %}); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; backdrop-filter: blur(10px);"#}
+{#       {% endif %}>#}
+{#        {% else %}#}
+{#            "background-image: url({% static 'images/bg_light.jpg' %}); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; backdrop-filter: blur(5px);"{% endif %}>#}
+
+      <!--    NAVIGATION-->
  {% include 'includes/navigation.html' %}
-      <!--    HEADER-->
-      <header class="flex relative  bg-white shadow flex items-center ">
-        <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8 ">
-{#            {% block title %}{% endblock %}#}
-            {% block header %}{% endblock %}
-        <div class="flex flex-col absolute right-10 top-5 ">
-            {% include 'includes/messages.html' %}
-        </div>
+ {% include 'includes/footer.html' %}
 
+      <!--    HEADER-->
+      <header class="container m-auto flex relative shadow flex justify-center items-center py-5  border border-red-500">
+            {% block title %}{% endblock %}
+        <div class="flex flex-col absolute right-10 top-5 border border-red-500">
+            message
+            {% include 'includes/messages.html' %}
         </div>
       </header>
 
       <!--    DASHBOARD-->
-      <main class="dark:bg-primary bg-secondary">
-        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          <div class="px-4 sm:px-0">
-            <div class="h-full rounded-lg border-4 border-gray-200 flex items-center">
-              <div class="overflow-x-auto w-full h-full">
-                <div class="flex items-center justify-center font-sans overflow-hidden p-5">
-                    {% block tabs %}{% endblock %}
+      <main class="container m-auto h-full max-h-screen border border-red-500 ">
+
                   {% block content %}{% endblock %}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8"></div>
+
+
       </main>
-    </div>
+
+
 
      <script>
         let links = document.querySelectorAll('.nav a');
         links.forEach(link => {
             const currentLink = document.URL;
-            const route = currentLink.split('/')[3];
-            const newsLink = document.querySelector('.news');
-            const bookLink = document.querySelector('.book');
-            const noteLink = document.querySelector('.note');
-
             if (link.href === currentLink) {
-                link.classList.add('bg-gray-900');
+                link.classList.add('bg-[#012210c4]');
+                link.classList.add('dark:bg-[#011b0d]');
             }
-            if (route === 'newsapp') {
-                newsLink.classList.add('bg-gray-900');
-            }
-            if (route === 'book_app') {
-                bookLink.classList.add('bg-gray-900');
-            }
-            if (route === 'note_app') {
-                noteLink.classList.add('bg-gray-900');
-            }
+
         });
     </script>
     <script>
@@ -79,6 +66,8 @@
             })
         }, 1500);
     </script>
-  <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+
+  <script  type="module" src="{% static 'js/app.js' %}"></script>
+  </div>
   </body>
 </html>

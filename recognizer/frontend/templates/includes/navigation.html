@@ -1,25 +1,17 @@
 {% load static %}
-<nav class="bg-primary-light dark:bg-primary-dark">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+<nav class="bg-[#012210b3]">
+        <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
           <div class="flex h-16 items-center justify-between">
             <div class="flex items-center">
-{#              <div class="flex-shrink-0 text-white">#}
-{#                <img#}
-{#                  class="h-10 w-10 "#}
-{##}
-{#                  src="{% static 'images/logo.svg' %}"#}
-{#                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"#}
-{#                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"#}
-{#                  alt="Your Company"#}
-{#                />#}
-{#              </div>#}
+
             <!--    LOGO Title-->
                 <a href={% url 'frontend:about' %} >
-                    <h1 class='font-bold text-4xl flex text-red-600 dark:text-white tracking-tight uppercase ml-4'>
+                    <h1 class='font-thin text-5xl flex text-[#6df492] tracking-tight uppercase ml-4'>
                         NA <img
                   class="h-10 w-10 "
 
-{#                  src="{% static 'images/logo.svg' %}"#}
+                  src="{% static 'images/favicon-3.png' %}"
                   src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
 {#                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"#}
                   alt="Your Company"
@@ -29,23 +21,22 @@
 
 {#                left side of the navbar#}
               <div class="hidden md:block">
-                <div class="ml-10 flex items-baseline space-x-4 nav">
+                <div class="flex items-baseline space-x-4 font-medium text-gray-300  text-lg   ml-10  nav">
                     <a
                     href="{% url 'frontend:about' %}"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium news"
+                    class="px-3 py-2 rounded-md hover:bg-[#012210c4] dark:hover:bg-[#011b0d] hover:text-white transition-colors duration-200  pointer about"
                     aria-current="page"
                     >Home</a
                   >
                   <a
                     href="{% url 'frontend:classifier' %}"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium book"
+                    class="px-3 py-2 rounded-md hover:bg-[#012210c4] dark:hover:bg-[#011b0d] hover:text-white transition-colors duration-200 classifier"
                     aria-current="page"
                     >Classifier</a
                   >
-{#                  z#}
                   <a
                     href="{% url 'frontend:team' %}"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    class="px-3 py-2 rounded-md hover:bg-[#012210c4] dark:hover:bg-[#011b0d] hover:text-white transition-colors duration-200 team"
                     >Team</a
                   >
                 </div>
@@ -105,3 +96,14 @@
         </div>
         {% include 'includes/mob_menu.html' %}
       </nav>
+
+{#              <div class="flex-shrink-0 text-white">#}
+{#                <img#}
+{#                  class="h-10 w-10 "#}
+{##}
+{#                  src="{% static 'images/logo.svg' %}"#}
+{#                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"#}
+{#                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"#}
+{#                  alt="Your Company"#}
+{#                />#}
+{#              </div>#}
