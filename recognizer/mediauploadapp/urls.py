@@ -26,10 +26,14 @@ urlpatterns = [
     path('photos_chat_gpt/', views.photo_list, name='photo_list_chat_gpt'),
     path('photos_image_generator/', views.photo_list, name='photo_list_image_generator'),
 
-    path('photos/', views.photo_list, name='photo_list'),
+    path('photos_list/', views.DataBasePhotosList.as_view(), name='photo_list'),
     path('photos/clear/', views.clear_database, name='clear_database'),
     path('photos/<int:pk>/', views.delete_photo, name='delete_photo'),
+
+    path('photos_upload_cifar10/', views.BasicUploadViewCifar10.as_view(), name='photo_upload_cifar10'),
+    path('photos_upload_cifar100/', views.BasicUploadViewCifar100.as_view(), name='photo_upload_cifar100'),
     path('basicphoto/upload/', views.BasicUploadView.as_view(), name='basic_upload'),
-    path('progressbar/upload/', views.ProgressBarUploadView.as_view(), name='progress_bar_upload'),
-    path('draganddrop/upload/', views.DragAndDropUploadView.as_view(), name='drag_and_drop_upload'),
+    path('predict_cifar10_dropdown/<int:pk>/', views.predict_cifar10_dropdown, name='predict_cifar10_dropdown'),
+    path('predict_cifar100_dropdown/<int:pk>/', views.predict_cifar100_dropdown, name='predict_cifar100_dropdown'),
+    path('predict/', views.predict_pictures, name='predict_pictures'),
 ]
