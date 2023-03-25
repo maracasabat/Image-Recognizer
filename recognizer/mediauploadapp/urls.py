@@ -31,7 +31,9 @@ urlpatterns = [
     path('photos/<int:pk>/', views.delete_photo, name='delete_photo'),
 
     path('photos_upload_cifar10/', views.BasicUploadViewCifar10.as_view(), name='photo_upload_cifar10'),
+    path('photos_upload_cifar100/', views.BasicUploadViewCifar100.as_view(), name='photo_upload_cifar100'),
     path('basicphoto/upload/', views.BasicUploadView.as_view(), name='basic_upload'),
-    path('predict_photo_dropdown/<int:pk>/', views.predict_photo_dropdown, name='predict_photo_dropdown'),
+    path('predict_cifar10_dropdown/<int:pk>/', views.predict_cifar10_dropdown, name='predict_cifar10_dropdown'),
+    path('predict_cifar100_dropdown/<int:pk>/', views.predict_cifar100_dropdown, name='predict_cifar100_dropdown'),
     path('predict/', views.predict_pictures, name='predict_pictures'),
 ]
