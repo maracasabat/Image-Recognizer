@@ -2,7 +2,7 @@
 
 {% block header %}
     <div class="flex-col items-center" style='align-items: center; justify-content: center; display: flex'>
-        <h2 class='flex font-bold text-3xl text-gray-900 tracking-tight uppercase mb-5'> CIFAR-10 Image recognizer</h2>
+        <h2 class='flex font-bold text-3xl text-gray-900 tracking-tight uppercase mb-5'> CIFAR-100 Image recognizer</h2>
         <div class="flex">{% include 'mediauploadapp/includes/tabs.html' %}</div>
     </div>
 {% endblock %}
@@ -27,10 +27,26 @@
           <div class="u-container-layout u-container-layout-1">
             <h1 class='flex font-bold text-3xl text-gray-900 tracking-tight mb-5'> How it works?</h1>
             <p class="u-text u-text-default u-text-2">
-              <span class="u-text-body-color"> Just load the picture that could be a part of the 10 categories:</span>
+              <span class="u-text-body-color"> The tool can do even better: classify 100 categories:</span>
               <span style="font-weight: 700;">
                 <br>
-              </span>-&nbsp;'airplane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck'<br>-&nbsp;check if our classifier recognized your pictures correctly
+              </span>-&nbsp;'apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed', 'bee',
+               'beetle', 'bicycle', 'bottle', 'bowl', 'boy', 'bridge', 'bus',
+               'butterfly', 'camel', 'can', 'castle', 'caterpillar', 'cattle',
+               'chair', 'chimpanzee', 'clock', 'cloud', 'cockroach', 'couch',
+               'crab', 'crocodile', 'cup', 'dinosaur', 'dolphin', 'elephant',
+               'flatfish', 'forest', 'fox', 'girl', 'hamster', 'house',
+               'kangaroo', 'keyboard', 'lamp', 'lawn_mower', 'leopard', 'lion',
+               'lizard', 'lobster', 'man', 'maple_tree', 'motorcycle',
+               'mountain', 'mouse', 'mushroom', 'oak_tree', 'orange', 'orchid',
+               'otter', 'palm_tree', 'pear', 'pickup_truck', 'pine_tree',
+               'plain', 'plate', 'poppy', 'porcupine', 'possum', 'rabbit',
+               'raccoon', 'ray', 'road', 'rocket', 'rose', 'sea', 'seal',
+               'shark', 'shrew', 'skunk', 'skyscraper', 'snail', 'snake',
+               'spider', 'squirrel', 'streetcar', 'sunflower', 'sweet_pepper',
+               'table', 'tank', 'telephone', 'television', 'tiger', 'tractor',
+               'train', 'trout', 'tulip', 'turtle', 'wardrobe', 'whale',
+               'willow_tree', 'wolf', 'woman', 'worm'<br>-&nbsp;check if our classifier recognized your pictures correctly
             </p>
           </div>
         </div>
@@ -81,7 +97,7 @@
                         <tr>
                           <td><a class = "text-gray-500" href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>
                           <td class="text-center ">
-                            <form method="post" action="{% url 'predict_cifar10_dropdown' photo.pk %}">
+                            <form method="post" action="{% url 'predict_cifar100_dropdown' photo.pk %}">
                               {% csrf_token %}
                               <button class="pointer px-6 py-4 flex-inline items-center justify-center text-red-600" type="submit" ><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
