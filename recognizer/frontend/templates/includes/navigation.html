@@ -1,0 +1,109 @@
+{% load static %}
+
+<nav class="bg-[#012210b3]">
+        <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
+          <div class="flex h-16 items-center justify-between">
+            <div class="flex items-center">
+
+            <!--    LOGO Title-->
+                <a href={% url 'frontend:about' %} >
+                    <h1 class='font-thin text-5xl flex text-[#6df492] tracking-tight uppercase ml-4'>
+                        NA <img
+                  class="h-10 w-10 "
+
+                  src="{% static 'images/favicon-3.png' %}"
+                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+{#                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"#}
+                  alt="Your Company"
+                /> AI
+                </h1>
+                </a>
+
+{#                left side of the navbar#}
+              <div class="hidden md:block">
+                <div class="flex items-baseline space-x-4 font-medium text-gray-300  text-lg   ml-10  nav">
+                    <a
+                    href="{% url 'frontend:about' %}"
+                    class="px-3 py-2 rounded-md hover:bg-[#012210c4] dark:hover:bg-[#011b0d] hover:text-white transition-colors duration-200  pointer about"
+                    aria-current="page"
+                    >Home</a
+                  >
+                  <a
+                    href="{% url 'frontend:classifier' %}"
+                    class="px-3 py-2 rounded-md hover:bg-[#012210c4] dark:hover:bg-[#011b0d] hover:text-white transition-colors duration-200 classifier"
+                    aria-current="page"
+                    >Classifier</a
+                  >
+                  <a
+                    href="{% url 'frontend:team' %}"
+                    class="px-3 py-2 rounded-md hover:bg-[#012210c4] dark:hover:bg-[#011b0d] hover:text-white transition-colors duration-200 team"
+                    >Team</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="hidden md:block">
+              <div class="ml-4 flex items-center justify-center md:ml-6">
+{#                  <p class="text-[#6366f1] px-3 py-2 rounded-md text-sm font-medium">Hello, {{ user.username }}</p>#}
+
+{#                  if dark theme icon is sun.svg els if light icon is moon.svg#}
+
+
+                  <a href="{% url 'frontend:change-theme' %}">
+                      {% if is_dark_theme %}
+
+                          <button type="button" class="rounded-full  p-1 text-gray-400 hover:text-white duration-300 ">
+                                {% include 'includes/icons/sun.svg' %}
+                            </button>
+
+                      {% else %}
+                            <button type="button" class="rounded-full  p-1 text-gray-400 hover:text-white duration-300 ">
+                              {% include 'includes/icons/moon.svg' %}
+                          </button>
+                      {% endif %}
+                  </a>
+
+
+
+                  <a href="{% url 'settings' user.username %}">
+                    <button type="button" class="rounded-full  p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span class="sr-only p-1">User Settings</span>
+                        {% include 'includes/icons/settings.svg' %}
+                    </button>
+                 </a>
+
+                  <a href="{% url 'logout' %}">
+                      <button type="button" class="rounded-full  p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span class="sr-only">Log out</span>
+                        {% include 'includes/icons/logout.svg' %}
+                      </button>
+                  </a>
+
+                <div class="relative ml-3">
+                  <div class="flex items-center">
+                    <img
+                      class="h-8 w-8 rounded-full"
+                      src="{{ user.avatar.url }}"
+                      alt="avatar"
+                    />
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% include 'includes/mob_menu_btn.html' %}
+          </div>
+        </div>
+        {% include 'includes/mob_menu.html' %}
+      </nav>
+
+{#              <div class="flex-shrink-0 text-white">#}
+{#                <img#}
+{#                  class="h-10 w-10 "#}
+{##}
+{#                  src="{% static 'images/logo.svg' %}"#}
+{#                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"#}
+{#                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"#}
+{#                  alt="Your Company"#}
+{#                />#}
+{#              </div>#}

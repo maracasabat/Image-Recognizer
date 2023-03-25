@@ -20,7 +20,7 @@ def register_view(request, backend='users.backends.EmailBackend'):
             user = form.save()
             login(request, user, backend=backend)
             messages.success(request, f"Welcome {user.username}!")
-            return redirect("main:homepage")
+            return redirect("frontend:about")
         else:
             for error in list(form.errors.values()):
                 print('error', messages.error)
@@ -49,7 +49,7 @@ def custom_login(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, f"Hello <b>{user.username}</b>! You have been logged in")
-                return redirect("main:homepage")
+                return redirect("frontend:about")
 
         else:
             for error in list(form.errors.values()):
@@ -69,7 +69,7 @@ def custom_login(request):
 def custom_logout(request):
     logout(request)
     # messages.info(request, "Logged out successfully!")
-    return redirect('main:homepage')
+    return redirect('frontend:about')
 
 
 @login_required
@@ -90,12 +90,12 @@ def custom_settings(request, username):
     if user:
         form = UserUpdateForm(instance=user)
         return render(request=request,
-                      template_name="main/settingsPage.html",
+                      template_name="pages/settings.html",
                       context={"form": form})
     else:
-        return redirect('main:homepage')
+        return redirect('frontend:about')
 
 
 def signup_redirect(request):
     messages.error(request, "Something wrong here, it may be that you already have account!")
-    return redirect("main:homepage")
+    return redirect("frontend:about")

@@ -1,0 +1,39 @@
+    <div class="menu hidden  md:hidden" id="mobile-menu">
+      <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+
+        <a href="{% url 'frontend:about' %}" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Home</a>
+
+        <a href="{% url 'frontend:classifier' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Classifier</a>
+
+        <a href="{% url 'frontend:team' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
+
+      </div>
+      <div class="border-t border-gray-700 pt-4 pb-3">
+        <div class="flex items-center px-5">
+          <div class="flex-shrink-0">
+            <img class="h-10 w-10 rounded-full" src="{{ user.avatar.url }}" alt="">
+          </div>
+          <div class="ml-3">
+            <div class="text-base font-medium leading-none text-white">{{ user.username }}</div>
+
+          </div>
+            <button type="button" class="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+            <a href="{% url 'frontend:change-theme' %}">
+                {% if is_dark_theme %}
+                    {% include 'includes/icons/sun.svg' %}
+
+                {% else %}
+                    {% include 'includes/icons/moon.svg' %}
+                {% endif %}
+            </a>
+            </button>
+
+        </div>
+        <div class="mt-3 space-y-1 px-2">
+
+          <a href="{% url 'settings' user.username %}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
+
+          <a href="{% url 'logout' %}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
+        </div>
+      </div>
+    </div>
