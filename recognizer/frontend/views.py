@@ -15,6 +15,11 @@ def image_classifier(request):
 
 
 @login_required
+def gallery_page(request):
+    return render(request, "pages/galleryPage.html")
+
+
+@login_required
 def settings_page(request):
     return render(request, "pages/settings.html")
 
@@ -31,3 +36,5 @@ def change_theme(request, **kwargs):
         request.session['is_dark_theme'] = True
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+

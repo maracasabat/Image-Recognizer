@@ -9,14 +9,14 @@ module.exports = {
     darkMode: "class",
     //  purge: {
     //     enabled: true,
-    //     content: ['frontend/templates/base.html'],
+    //     content: ['frontend/templates/main.html'],
     // },
     content: [
         /**
          * HTML. Paths to Django template files that will contain Tailwind CSS classes.
          */
 
-        /*  Templates within frontend app (<tailwind_app_name>/templates), e.g. base.html. */
+        /*  Templates within frontend app (<tailwind_app_name>/templates), e.g. main.html. */
         '../templates/**/*.html',
 
         /*
