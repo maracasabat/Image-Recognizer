@@ -23,15 +23,54 @@
   <script src="{% static 'mediauploadapp/js/basic-upload-photo.js' %}"></script>
 {% endblock %}
 
-    <div class="flex flex-col gap-5 justify-center items-center py-10">
-        <p class="inline-block mb-2 text-gray-500">Upload Image(jpg,png,svg,jpeg)</p>
-     <form method="post" enctype="multipart/form-data">
+        <div class="flex flex-col justify-center align-center">
+        <div class='flex flex-col md:flex-row items-center justify-center '>
+
+            <!-- Input Cifar10 Cifar-100 -->
+            <div class=" flex items-center justify-center mb-2 md:mb-0 p-5 w-full md:w-1/2 border border-red-500 h-[300px] ">
+
+            <form class="flex w-full items-start justify-center gap-5" method="post" enctype="multipart/form-data">
          {% csrf_token %}
-         <input type="file" name="file" id="fileupload" data-url="{% url 'basic_upload' %}">
-         <button class="text-white dark:text-gray-900 px-10 py-2 border bg-[#012210b3] hover:bg-green-900 dark:bg-white rounded-lg  hover:bg-green-900 transition" type="submit">Predict</button>
+         <div class="flex flex-col justify-center gap-5">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="large_size">Upload Image(jpg,png,svg,jpeg)</label>
+            <input type="file" name="file" id="fileupload" data-url="{% url 'basic_upload' %}" class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" >
+                <button class="text-white dark:text-gray-900 px-10 py-2 border bg-[#012210b3] hover:bg-green-900 dark:bg-white rounded-lg  hover:bg-green-900 transition" type="submit">Predict</button>
+         </div>
      </form>
+
+{#                <div class="flex flex-col gap-5 justify-center items-center py-10">#}
+{#                    <p class="inline-block mb-2 text-gray-500">Upload Image(jpg,png,svg,jpeg)</p>#}
+{#                    <form method="post" enctype="multipart/form-data">#}
+{#                        {% csrf_token %}#}
+{#                        <input type="file" name="file" id="fileupload" data-url="{% url 'basic_upload' %}">#}
+{#                        <button class="text-white dark:text-gray-900 px-10 py-2 border bg-[#012210b3] hover:bg-green-900 dark:bg-white rounded-lg  hover:bg-green-900 transition" type="submit">Predict</button>#}
+{#                    </form>#}
+{#                </div>#}
+
+                <!----------My DROPZONE---------->
+{#                <form action='basic_upload/' method='POST' enctype='multipart/form-data'  id="my-awesome-dropzone" class="dropzone w-full h-[250px] text-gray-800 rounded-lg  opacity-50 ">#}
+{#                    {% csrf_token %}#}
+{##}
+{#                   <!-- Dropzone -->#}
+{#                     <div class="fallback">#}
+{#                        <input name="file" type="file" multiple data-url={% url 'basic_upload' %}/>#}
+{#                    </div>#}
+{##}
+{#                </form>#}
+            </div>
+
+            <div class="w-full  p-5 md:w-1/2 border border-red-500 h-[300px]">
+                 <h1 class="uppercase font-bold text-center">Prediction:  <span class="capitalize font-serif">{{ predict_pictures }}</span></h1>
+                <div class="flex flex-wrap justify-center">
+                    <img src="{{ photo }}" class="h-[250px] max-w-sm rounded-lg shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30" alt="" />
+                </div>
+            </div>
+        </div>
     </div>
 
+
+
+     <span>{{ predict_pictures }} </span>
 <!----------HISTORY---------->
 
 {% block photos_content %}
