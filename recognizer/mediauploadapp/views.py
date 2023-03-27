@@ -102,9 +102,11 @@ class BasicUploadViewCifar10(View):
 
     def get(self, request):
         photos_list = Photo.objects.filter(author_id=request.user).all()
+
         return render(self.request, 'mediauploadapp/basic_upload_photo_cifar10.html', {'photos': photos_list})
 
     def post(self, request):
+        photos_list = Photo.objects.filter(author_id=request.user).all()
         form = PhotoForm(self.request.POST, self.request.FILES)
         if form.is_valid():
             photo = form.save(commit=False)
@@ -117,7 +119,9 @@ class BasicUploadViewCifar10(View):
 
         predict_pictures = predict_cifar(CIFAR10, self.photo, CIFAR10_CATEGORIES)
 
-        return render(request, 'pages/imageClassifier.html', {'predict_pictures': predict_pictures, 'photo': self.photo})
+        # return render(request, 'pages/imageClassifier.html', {'predict_pictures': predict_pictures, 'photo': self.photo})
+        return render(request, 'mediauploadapp/basic_upload_photo_cifar10.html', {'predict_pictures': predict_pictures, 'photo': self.photo, 'photos': photos_list})
+
 
 
 @login_required
@@ -141,6 +145,7 @@ class BasicUploadViewCifar100(View):
         return render(self.request, 'mediauploadapp/basic_upload_photo_cifar100.html', {'photos': photos_list})
 
     def post(self, request):
+        photos_list = Photo.objects.filter(author_id=request.user).all()
         form = PhotoForm(self.request.POST, self.request.FILES)
         if form.is_valid():
             photo = form.save(commit=False)
@@ -153,7 +158,8 @@ class BasicUploadViewCifar100(View):
 
         predict_pictures = predict_cifar(CIFAR100, self.photo, CIFAR100_CATEGORIES)
 
-        return render(request, 'pages/imageClassifier.html', {'predict_pictures': predict_pictures, 'photo':self.photo})
+        # return render(request, 'pages/imageClassifier.html', {'predict_pictures': predict_pictures, 'photo':self.photo})
+        return render(request, 'mediauploadapp/basic_upload_photo_cifar100.html', {'predict_pictures': predict_pictures, 'photo':self.photo, 'photos': photos_list})
 
 
 @login_required
@@ -163,7 +169,7 @@ def predict_cifar100_dropdown(request, pk):
 
         predict_pictures = predict_cifar(CIFAR100, file.file.url, CIFAR100_CATEGORIES)
 
-    return render(request, 'pages/imageClassifier.html', {'predict_pictures': predict_pictures})
+    return render(request, 'mediauploadapp/basic_upload_photo_cifar100.html', {'predict_pictures': predict_pictures})
 
 
 def predict_cifar(best_model, img_url, categories):
