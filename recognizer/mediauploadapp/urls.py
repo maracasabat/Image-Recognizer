@@ -18,4 +18,6 @@ urlpatterns = [
     path('basicphoto/upload/', views.BasicUploadView.as_view(), name='basic_upload'),
     path('predict_cifar10_dropdown/<int:pk>/', views.predict_cifar10_dropdown, name='predict_cifar10_dropdown'),
     path('predict_cifar100_dropdown/<int:pk>/', views.predict_cifar100_dropdown, name='predict_cifar100_dropdown'),
+
+    path('dl_chat_bot/', views.dl_chat_bot, name='dl_chat_bot'),
 ]
