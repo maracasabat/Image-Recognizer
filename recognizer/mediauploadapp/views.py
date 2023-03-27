@@ -1,23 +1,16 @@
 import random
 
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
-from .models import File, Book, Photo, User
-from django.http import HttpResponseRedirect
-from django.template import RequestContext
-from django.http import JsonResponse
-from django.core.files.storage import FileSystemStorage
-from django.views.generic import TemplateView, ListView, CreateView
+from .models import Photo, User
+from django.views.generic import TemplateView
 from django.views import View
-from .forms import FileForm, BookForm, PhotoForm
-from django.urls import reverse_lazy
+from .forms import PhotoForm
 import tensorflow as tf
 from tensorflow import keras
 from keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
-import joblib
 
 CIFAR10 = 'mediauploadapp/model/model_best_V.h5'
 CIFAR100 = 'mediauploadapp/model/best_result_cifar100.h5'
@@ -51,152 +44,7 @@ def main(request):
     return render(request, 'mediauploadapp/index.html', {})
 
 
-""" Add method for the simple upload """
-
-
-@login_required
-def upload(request):
-    context = {}
-    try:
-        if request.method == 'POST':
-            uploaded_file = request.FILES['document']
-            fs = FileSystemStorage()
-            name = fs.save(uploaded_file.name, uploaded_file)
-            context['url'] = fs.url(name)
-        return render(request, 'mediauploadapp/upload.html', context)
-    except KeyError:
-        return render(request, 'mediauploadapp/upload.html', {})
-
-
-""" Add methods for the file upload """
-
-
-@login_required
-def file_list(request):
-    files = File.objects.filter(author_id=request.user).all()
-    files_video = File.objects.all().filter(category="video", author_id=request.user)
-    files_image = File.objects.all().filter(category="image", author_id=request.user)
-    files_document = File.objects.all().filter(category="document", author_id=request.user)
-    files_music = File.objects.all().filter(category="music", author_id=request.user)
-    files_other = File.objects.all().filter(category="other", author_id=request.user)
-    return render(request, 'mediauploadapp/file_list.html', {
-        'files': files,
-        'files_video': files_video,
-        'files_image': files_image,
-        'files_document': files_document,
-        'files_music': files_music,
-        'files_other': files_other
-    })
-
-
-@login_required
-def file_list_image(request):
-    files_image = File.objects.all().filter(category="image", author_id=request.user)
-    return render(request, 'mediauploadapp/file_list_image.html', {
-        'files_image': files_image,
-    })
-
-
-@login_required
-def file_list_video(request):
-    files_video = File.objects.all().filter(category="video", author_id=request.user)
-    return render(request, 'mediauploadapp/file_list_video.html', {
-        'files_video': files_video,
-    })
-
-
-@login_required
-def file_list_document(request):
-    files_document = File.objects.all().filter(category="document", author_id=request.user)
-    return render(request, 'mediauploadapp/file_list_document.html', {
-        'files_document': files_document,
-    })
-
-
-@login_required
-def file_list_music(request):
-    files_music = File.objects.all().filter(category="music", author_id=request.user)
-    return render(request, 'mediauploadapp/file_list_music.html', {
-        'files_music': files_music,
-    })
-
-
-@login_required
-def file_list_other(request):
-    files_other = File.objects.all().filter(category="other", author_id=request.user)
-    return render(request, 'mediauploadapp/file_list_other.html', {
-        'files_other': files_other,
-    })
-
-
-@login_required
-def upload_file(request):
-    if request.method == 'POST':
-        form = FileForm(request.POST, request.FILES)
-        if form.is_valid():
-            file = form.save(commit=False)
-            file.author_id = request.user
-            file.save()
-            return redirect('file_list')
-    else:
-        form = FileForm()
-    return render(request, 'mediauploadapp/upload_file.html', {
-        'form': form
-    })
-
-
-@login_required
-def delete_file(request, pk):
-    if request.method == 'POST':
-        file = File.objects.get(pk=pk, author_id=request.user)
-        file.delete()
-    return redirect('file_list')
-
-
-""" Add methods for the book upload """
-
-
-@login_required
-def book_list(request):
-    books = Book.objects.filter(author_id=request.user).all()
-    return render(request, 'mediauploadapp/book_list.html', {
-        'books': books
-    })
-
-
-@login_required
-def upload_book(request):
-    if request.method == 'POST':
-        form = BookForm(request.POST, request.FILES)
-        if form.is_valid():
-            book = form.save(commit=False)
-            book.author_id = request.user
-            book.save()
-            return redirect('book_list')
-    else:
-        form = BookForm()
-    return render(request, 'mediauploadapp/upload_book.html', {
-        'form': form
-    })
-
-
-@login_required
-def delete_book(request, pk):
-    if request.method == 'POST':
-        book = Book.objects.get(pk=pk, author_id=request.user)
-        book.delete()
-    return redirect('book_list')
-
-
-class UploadBookView(CreateView):
-    model = Book
-    form_class = BookForm
-    success_url = reverse_lazy('class_book_list')
-    template_name = 'mediauploadapp/upload_book.html'
-
-
 """ Add methods for the photos upload """
-
 
 @login_required
 def photo_list(request):
@@ -346,21 +194,3 @@ def delete_photo(request, pk):
         file = Photo.objects.get(pk=pk, author_id=request.user)
         file.delete()
     return redirect('basic_upload')
-
-
-""" Original method to install ML Model for the Predictions """
-
-
-def predict_pictures(request):
-    model = load_model('mediauploadapp/model/model_best_V.h5')
-
-    img = keras.preprocessing.image.load_img('mediauploadapp/media/photos/how-to-draw-an-easy-horse-featured.jpg',
-                                             target_size=(32, 32))
-    img_array = keras.preprocessing.image.img_to_array(img)
-    img_array = tf.expand_dims(img_array, 0)
-
-    predictions = model.predict(img_array)
-    class_names = CIFAR100_CATEGORIES
-    predict_pictures = class_names[np.argmax(predictions[0])]
-
-    return render(request, 'mediauploadapp/predict.html', {'predict_pictures': predict_pictures})
