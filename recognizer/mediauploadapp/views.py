@@ -169,7 +169,7 @@ def predict_cifar100_dropdown(request, pk):
 
         predict_pictures = predict_cifar(CIFAR100, file.file.url, CIFAR100_CATEGORIES)
 
-    return render(request, 'pages/imageClassifier.html', {'predict_pictures': predict_pictures})
+    return render(request, 'mediauploadapp/basic_upload_photo_cifar100.html', {'predict_pictures': predict_pictures})
 
 
 def predict_cifar(best_model, img_url, categories):
