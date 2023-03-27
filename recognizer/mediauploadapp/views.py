@@ -102,6 +102,7 @@ class BasicUploadViewCifar10(View):
 
     def get(self, request):
         photos_list = Photo.objects.filter(author_id=request.user).all()
+
         return render(self.request, 'mediauploadapp/basic_upload_photo_cifar10.html', {'photos': photos_list})
 
     def post(self, request):
