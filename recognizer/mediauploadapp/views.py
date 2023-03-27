@@ -1,7 +1,12 @@
+import io
 import random
 
+import requests
+from PIL import Image
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from urllib3.packages.six import BytesIO
+
 from .models import Photo, User
 from django.views.generic import TemplateView
 from django.views import View
@@ -11,6 +16,8 @@ from tensorflow import keras
 from keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
+
+from keras.utils import get_file
 
 CIFAR10 = 'mediauploadapp/model/model_best_V.h5'
 CIFAR100 = 'mediauploadapp/model/best_result_cifar100.h5'
@@ -169,7 +176,10 @@ def predict_cifar100_dropdown(request, pk):
 def predict_cifar(best_model, img_url, categories):
     model = load_model(best_model)
 
-    img = keras.preprocessing.image.load_img('mediauploadapp' + img_url, target_size=(32, 32))
+    response = requests.get(img_url)
+    image_io = io.BytesIO(response.content)
+    img = keras.preprocessing.image.load_img(image_io, target_size=(32, 32))
+
     img_array = keras.preprocessing.image.img_to_array(img)
     img_array = tf.expand_dims(img_array, 0)
 
