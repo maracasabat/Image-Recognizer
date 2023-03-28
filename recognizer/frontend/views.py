@@ -10,16 +10,6 @@ def homepage(request):
 
 
 @login_required
-def image_classifier(request):
-    return render(request, "pages/imageClassifier.html")
-
-
-@login_required
-def gallery_page(request):
-    return render(request, "pages/galleryPage.html")
-
-
-@login_required
 def settings_page(request):
     return render(request, "pages/settings.html")
 

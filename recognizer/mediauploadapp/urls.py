@@ -6,11 +6,10 @@ from . import views
 urlpatterns = [
     path('', views.Home.as_view(), name='home'),
 
-
-    path('photos/', views.photo_list, name='photo_list'),
-
     path('photos_list/', views.DataBasePhotosList.as_view(), name='photo_list'),
     path('photos/clear/', views.clear_database, name='clear_database'),
+    path('photos_10/<int:pk>/', views.delete_photo_cifar_10, name='delete_photo_cifar_10'),
+    path('photos_100/<int:pk>/', views.delete_photo_cifar_100, name='delete_photo_cifar_100'),
     path('photos/<int:pk>/', views.delete_photo, name='delete_photo'),
 
     path('photos_upload_cifar10/', views.BasicUploadViewCifar10.as_view(), name='photo_upload_cifar10'),

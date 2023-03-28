@@ -4,7 +4,7 @@
     <h2 class="text-3xl font-bold mb-5">How it works?</h2>
     <div class="">
             <p class=" tracking-wide"> Just load the picture that could be a part of the 10 categories:</p>
-            <p> airplane, car, bird, cat, deer, dog, frog, horse, ship, truck</p>
+        <details> airplane, car, bird, cat, deer, dog, frog, horse, ship, truck</details>
             <p>Check if our classifier recognized your pictures correctly</p>
           </div>
 </div>
@@ -15,12 +15,12 @@
 {% block javascript %}
     {% load static %}
   {# JQUERY FILE UPLOAD SCRIPTS #}
-{#  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>#}
-{#  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>#}
-{#  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>#}
+  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
 
-  {# PHOTOS PAGE SCRIPTS #}
-{#  <script src="{% static 'mediauploadapp/js/basic-upload-photo.js' %}"></script>#}
+{#   PHOTOS PAGE SCRIPTS #}
+  <script src="{% static 'mediauploadapp/js/basic-upload-photo.js' %}"></script>
 {% endblock %}
 
        {% include 'includes/input.html' %}
@@ -42,7 +42,14 @@
         <div class="bg-[#012210b3] dark:bg-white w-72 pb-4 rounded-3xl shadow-lg overflow-hidden">
             <div class="flex flex-col items-center justify-center">
 
-                {% include 'includes/image.html' %}
+{#                {% include 'includes/image.html' %}#}
+                <img class="w-full h-[150px] rounded-lg shadow-lg object-cover cursor-pointer" src="{{ photo.file.url }}" alt="{{ photo.file.name }}" onclick="showModal(src)"/>
+                    <div class="mt-1 mb-3 px-4 text-left w-full text-gray-100 dark:text-gray-900">
+                        <h3 class="text-xl font-semibold ">Prediction:</h3>
+                        <p class="mb-2 text-sm text-gray-400 dark:text-gray-900">
+                            {{ photo.file.name }}
+                        </p>
+                    </div>
 
             <div class="flex items-center justify-between w-full px-4">
                 <form class="px-3 py-1 bg-green-800 hover:bg-green-900 text-white border rounded-lg capitalize"  method="post" action="{% url 'predict_cifar10_dropdown' photo.pk %}">
@@ -51,7 +58,7 @@
                   Prediction
                   </button>
             </form>
-                <form class="px-3 py-1 bg-red-600 hover:bg-red-800 text-white border rounded-lg capitalize" method="post" action="{% url 'delete_photo' photo.pk %}">
+                <form class="px-3 py-1 bg-red-600 hover:bg-red-800 text-white border rounded-lg capitalize" method="post" action="{% url 'delete_photo_cifar_10' photo.pk %}">
               {% csrf_token %}
               <button type="submit" >
                   Delete
@@ -69,10 +76,10 @@
 
       <!-- The Modal -->
     <div id="modal"
-        class="hidden fixed top-0 left-0 z-80 w-screen h-screen bg-black/70 flex justify-center items-center">
+        class="hidden fixed top-0 left-0 z-20 w-screen h-screen bg-black/70 flex justify-center items-center">
 
         <!-- The close button -->
-        <a class="fixed z-90 top-6 right-8 text-white text-5xl font-bold" href="javascript:void(0)"
+        <a class="fixed z-30 top-6 right-8 text-white text-5xl font-bold" href="javascript:void(0)"
             onclick="closeModal()">&times;</a>
 
         <!-- A big image will be displayed here -->
