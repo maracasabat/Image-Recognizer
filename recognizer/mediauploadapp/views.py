@@ -223,10 +223,11 @@ def delete_photo(request, pk):
 """ Add Chat bot based on Deep Learning with Python Book """
 @login_required
 def dl_chat_bot(request):
-    index = GPTTreeIndex.load_from_disk('mediauploadapp/model/index.json')
+    # index = GPTTreeIndex.load_from_disk('mediauploadapp/model/index.json')
     prompt = request.GET.get('prompt')
     if prompt:
-        response = index.query(prompt)
+        pass
+        # response = index.query(prompt)
     else:
         response = "..."
     return render(request, 'mediauploadapp/dl_chat_bot.html', {'response': response})
