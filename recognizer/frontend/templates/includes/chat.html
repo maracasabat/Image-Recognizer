@@ -1,0 +1,42 @@
+<!-- component -->
+<div class="flex h-screen antialiased text-gray-800">
+    <div class="flex flex-row h-full w-full overflow-x-hidden">
+      <div class="flex flex-col flex-auto h-2/3 p-6">
+        <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-[#3a5948]/50 dark:bg-[#c4ded1] border border-[#3a5948] shadow h-full p-4">
+          <div id="chat-output" class="flex flex-col h-full overflow-x-auto mb-4">  <!-- Messages will be displayed here --></div>
+          <form id="chat-form" class="flex flex-row items-center h-16 rounded-xl bg-[#3a5948] w-full px-4">
+            <div class="flex-grow ml-4">
+              <div class="relative w-full">
+                <input id="user-input" name="prompt" type="text"
+                  class="flex w-full border rounded-xl focus:outline-none focus:border-[#3a5948] pl-4 h-10"
+                />
+              </div>
+            </div>
+            <div class="ml-4">
+              <button type="submit"
+                class="flex items-center justify-center bg-[#3a5948] hover:bg-green-800 rounded-xl text-white px-4 py-1 flex-shrink-0"
+              >
+                <span>Send</span>
+                <span class="ml-2">
+                  <svg
+                    class="w-4 h-4 transform rotate-45 -mt-px"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                    ></path>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block title %}
+    <h1 class='text-3xl font-bold'>Prediction</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="flex flex-col justify-center items-center">
+        <div class='flex flex-col md:flex-row w-full items-center justify-center '>
+
+            {% include 'includes/input_pred.html' %}
+
+        </div>
+    </div>
+
+{#    {% include 'includes/buttons.html' %}#}
+
+{% endblock %}

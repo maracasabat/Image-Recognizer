@@ -127,7 +127,6 @@ class BasicUploadViewCifar10(View):
 
             predict_pictures = predict_cifar(CIFAR10, self.photo, CIFAR10_CATEGORIES)
 
-            # return render(request, 'pages/imageClassifier.html', {'predict_pictures': predict_pictures, 'photo': self.photo})
             return render(request, 'mediauploadapp/basic_upload_photo_cifar10.html',
                           {'predict_pictures': predict_pictures, 'photo': self.photo, 'photos': photos_list})
         except Exception:
@@ -137,14 +136,15 @@ class BasicUploadViewCifar10(View):
 
 @login_required
 def predict_cifar10_dropdown(request, pk):
+    photos_list = Photo.objects.filter(author_id=request.user).order_by('-uploaded_at').all()
     if request.method == 'POST':
         file = Photo.objects.get(pk=pk, author_id=request.user)
 
         predict_pictures = predict_cifar(CIFAR10, file.file.url, CIFAR10_CATEGORIES)
 
-        # return render(request, 'pages/imageClassifier.html', {'predict_pictures': predict_pictures})
-        return render(request, 'pages/imageClassifier.html',
-                      {'predict_pictures': predict_pictures, 'photo': file.file.url})
+        return render(request, 'pages/prediction.html', {'predict_pictures': predict_pictures, 'photo': file.file.url})
+    return render(request, 'mediauploadapp/basic_upload_photo_cifar10.html', {'photos': photos_list})
+
 
 
 """ Add methods for CIFAR100 Predictions """
@@ -173,7 +173,6 @@ class BasicUploadViewCifar100(View):
 
             predict_pictures = predict_cifar(CIFAR100, self.photo, CIFAR100_CATEGORIES)
 
-            # return render(request, 'pages/imageClassifier.html', {'predict_pictures': predict_pictures, 'photo':self.photo})
             return render(request, 'mediauploadapp/basic_upload_photo_cifar100.html',
                           {'predict_pictures': predict_pictures, 'photo': self.photo, 'photos': photos_list})
         except Exception:
@@ -183,14 +182,15 @@ class BasicUploadViewCifar100(View):
 
 @login_required
 def predict_cifar100_dropdown(request, pk):
+    photos_list = Photo.objects.filter(author_id=request.user).order_by('-uploaded_at').all()
     if request.method == 'POST':
         file = Photo.objects.get(pk=pk, author_id=request.user)
 
         predict_pictures = predict_cifar(CIFAR100, file.file.url, CIFAR100_CATEGORIES)
 
-        # return render(request, 'mediauploadapp/basic_upload_photo_cifar100.html', {'predict_pictures': predict_pictures})
-        return render(request, 'pages/imageClassifier.html',
-                      {'predict_pictures': predict_pictures, 'photo': file.file.url})
+        return render(request, 'pages/prediction.html', {'predict_pictures': predict_pictures, 'photo': file.file.url})
+    return render(request, 'mediauploadapp/basic_upload_photo_cifar100.html', {'photos': photos_list})
+
 
 
 def predict_cifar(best_model, img_url, categories):
@@ -219,20 +219,35 @@ def clear_database(request):
 
 
 @login_required
+def delete_photo_cifar_10(request, pk):
+    if request.method == 'POST':
+        file = Photo.objects.get(pk=pk, author_id=request.user)
+        file.delete()
+    return redirect('photo_upload_cifar10')
+
+@login_required
+def delete_photo_cifar_100(request, pk):
+    if request.method == 'POST':
+        file = Photo.objects.get(pk=pk, author_id=request.user)
+        file.delete()
+    return redirect('photo_upload_cifar100')
+
+@login_required
 def delete_photo(request, pk):
     if request.method == 'POST':
         file = Photo.objects.get(pk=pk, author_id=request.user)
         file.delete()
-    return redirect('basic_upload')
+    return redirect('photo_upload_cifar10')
 
 
 """ Add Chat bot based on Deep Learning with Python Book """
 @login_required
 def dl_chat_bot(request):
-    index = GPTTreeIndex.load_from_disk('mediauploadapp/model/index.json')
+    # index = GPTTreeIndex.load_from_disk('mediauploadapp/model/index.json')
     prompt = request.GET.get('prompt')
     if prompt:
-        response = index.query(prompt)
+        pass
+        # response = index.query(prompt)
     else:
         response = "..."
     return render(request, 'mediauploadapp/dl_chat_bot.html', {'response': response})

@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
+    'dropzone.apps.DropzoneConfig'
     'dropzone.apps.DropzoneConfig',
     'cloudinary_storage',
     'cloudinary',
@@ -156,6 +158,7 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
 
 AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend',
+                           'django.contrib.auth.backends.ModelBackend',
                            'allauth.account.auth_backends.AuthenticationBackend']
 
 MEDIA_URL = '/media/'
@@ -225,7 +228,13 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {
             'access_type': 'online',
         }
+    },
+    'github': {
+        'SCOPE': [
+            'user',
+            'repo',
+            'read:org',
+        ],
     }
 }
-
-OPENAI_API_KEY = os.environ.get(MY_OPENAI_API_KEY)
+OPENAI_API_KEY = os.environ['MY_OPENAI_API_KEY']
