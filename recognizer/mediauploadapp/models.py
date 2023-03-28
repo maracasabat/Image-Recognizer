@@ -15,7 +15,7 @@ class Photo(models.Model):
     author_id = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.title
+        return self.file, self.author_id
 
     def delete(self, *args, **kwargs):
         self.file.delete()
