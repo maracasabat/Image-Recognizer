@@ -1,0 +1,17 @@
+  <div class="flex items-center justify-between px-10 mb-4">
+        <form method="post" action="{% url 'clear_database' %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <button type="submit" class="text-white px-5 py-2 mt-5 border shadow rounded-lg bg-[#012210b3] hover:bg-green-900" >
+          Clear Database
+        </button>
+    </form>
+
+        <form method="post" action="{% url 'photo_list' %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <button type="submit" class="text-white px-5 py-2 mt-5 border shadow rounded-lg bg-[#012210b3] hover:bg-green-900" >
+          Show all my photos
+        </button>
+  </form>
+    </div>

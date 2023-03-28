@@ -31,74 +31,36 @@
 {% block javascript %}
     {% load static %}
   {# JQUERY FILE UPLOAD SCRIPTS #}
-  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
-  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
-  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
-
+{#  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>#}
+{#  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>#}
+{#  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>#}
+{##}
   {# PHOTOS PAGE SCRIPTS #}
-  <script src="{% static 'mediauploadapp/js/basic-upload-photo.js' %}"></script>
+{#  <script src="{% static 'mediauploadapp/js/basic-upload-photo.js' %}"></script>#}
 {% endblock %}
 
-        <div class="flex flex-col justify-center align-center">
-        <div class='flex flex-col md:flex-row items-center justify-center border md:border-transparent shadow rounded-lg bg-[#022e16]'>
-
-            <!-- Input Cifar10 Cifar-100 -->
-            <div class=" flex items-center justify-center mb-2 md:mb-0 p-5 w-full md:w-1/2  h-[300px] ">
-
-            <form class="flex w-full items-start justify-center gap-5" method="post" enctype="multipart/form-data">
-         {% csrf_token %}
-         <div class="flex flex-col justify-center gap-5">
-            <label class="block mb-4 text-sm font-medium uppercase text-white" for="large_size">Upload Image(jpg,png,svg,jpeg)</label>
-            <input type="file" name="file" id="fileupload" data-url="{% url 'basic_upload' %}" class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-[#d0e4da] dark:text-gray-400 focus:outline-none dark:bg-green-100 dark:border-gray-600 dark:placeholder-gray-500" >
-                <button class="text-white dark:text-gray-900 px-10 py-2 border bg-[#012210b3] hover:bg-green-900 dark:bg-white rounded-lg  hover:bg-green-900 transition" type="submit">Predict</button>
-         </div>
-     </form>
-            </div>
-
-            <div class="w-full md:p-5 md:w-1/2 h-[300px] text-white">
-                 <h1 class="uppercase font-bold text-center">Prediction:  <span class="capitalize font-serif">{{ predict_pictures }}</span></h1>
-                <div class="flex flex-wrap justify-center">
-                    <img src="{{ photo }}" class="h-[230px] max-w-sm rounded-lg shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30 object-fit" alt="" />
-                </div>
-            </div>
-        </div>
-    </div>
+     {% include 'includes/input.html' %}
 
 <!----------HISTORY---------->
 
 {% block photos_content %}
 
-    <div class="flex items-center justify-between px-10 mb-4">
-        <form method="post" action="{% url 'clear_database' %}">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.path }}">
-        <button type="submit" class="text-white px-5 py-2 mt-5 border shadow rounded-lg bg-[#012210b3] hover:bg-green-900" >
-          Clear Database
-        </button>
-    </form>
-
-        <form method="post" action="{% url 'photo_list' %}">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ request.path }}">
-        <button type="submit" class="text-white px-5 py-2 mt-5 border shadow rounded-lg bg-[#012210b3] hover:bg-green-900" >
-          Show all my photos
-        </button>
-  </form>
-    </div>
+   {% include 'includes/buttons.html' %}
 
 
-
+<h2 class="text-3xl font-bold my-5 text-center">History</h2>
     <div class="container flex flex-wrap items-center justify-center w-full p-4 gap-5">
     {% for photo in photos %}
         <div class="bg-[#012210b3] dark:bg-white w-72 pb-4 rounded-3xl shadow-lg overflow-hidden">
             <div class="flex flex-col items-center justify-center">
-                <img class="w-full h-[150px] rounded-lg shadow-lg object-cover cursor-pointer" src="{{ photo.file.url }}" alt="{{ photo.file.name }}" onclick="showModal(src)"/>
-                <div class="mt-1 mb-3 px-4 text-left w-full text-gray-100 dark:text-gray-900">
-                    <h3 class="text-xl font-semibold">Prediction: {{ predict_pictures }}</h3>
-                    <p class="mb-2 text-sm text-gray-400 dark:text-gray-900">
-                        {{ photo.file.name }}
-                    </p>
-                </div>
+
+            {% include 'includes/image.html' %}
+{#                {% else %}#}
+{#                {% if photo.image.url %}#}
+{#                   {% include 'includes/image.html' %}#}
+{#                {% else %}#}
+{#                    {% include 'includes/image_placeholder.html' %}#}
+{#                {% endif %}#}
 
             <div class="flex items-center justify-between w-full px-4">
                 <form class="px-3 py-1 bg-green-800 hover:bg-green-900 text-white border rounded-lg capitalize"  method="post" action="{% url 'predict_cifar100_dropdown' photo.pk %}">
