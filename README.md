@@ -12,7 +12,7 @@ With this application, you will be able to make a prediction of the uploaded pic
 
 ## General info
 **Image-Recognizer** - it performs the following functions:
-* **cifar10** - Identifies images in pictures and makes predictions for them based on the 10 image classes that have been trained.
+* **[cifar10](https://telegra.ph/Sifar10-03-28)** - Identifies images in pictures and makes predictions for them based on the 10 image classes that have been trained.
 * **cifar100** - Identifies images in pictures and makes predictions for them based on the 100 image classes that have been trained.
 * **chatGPT** - Provides answers to certain types of questions...
 
@@ -26,3 +26,4 @@ Project is mainly based on:
 
 ## Setup
 
+https://telegra.ph/Sifar10-03-28
