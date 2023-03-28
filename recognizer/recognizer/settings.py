@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
     'dropzone.apps.DropzoneConfig'
+    'dropzone.apps.DropzoneConfig',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -161,6 +164,13 @@ AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend',
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediauploadapp/media')
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
+    'API_KEY': os.environ.get('API_KEY'),
+    'API_SECRET': os.environ.get('API_SECRET')
+}
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_URL = '/media/'
@@ -177,9 +187,9 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-NPM_BIN_PATH = '/usr/local/bin/npm'  # MacOS
+# NPM_BIN_PATH = '/usr/local/bin/npm'  # MacOS
 
-# NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd" # Windows
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd" # Windows
 
 #  Configuring TinyMCE for admin
 
