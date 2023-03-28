@@ -88,3 +88,9 @@ Second terminal:
 (env)$ python manage.py runserver     
 ```
 * And navigate to `http://127.0.0.1:8000/.
+
+* Links to the models:
+  * **[cifar10](https://drive.google.com/file/d/1-oVU8YGdNXper8XTQCKj5Up67q0PTPFA/view?usp=sharing)**
+  * **[cifar100](https://drive.google.com/file/d/1wGkwfOPPQQFDv-Ka8SpX1pJcwo-ks8yx/view?usp=sharing)**
+
+
