@@ -1,6 +1,6 @@
 {% load static %}
 
-<nav class="bg-[#012210b3]">
+<nav class="bg-[#012210b3] fixed top-0 left-0 w-full z-10">
         <div class="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
           <div class="flex h-16 items-center justify-between">
             <div class="flex items-center">
@@ -12,8 +12,6 @@
                   class="h-10 w-10 "
 
                   src="{% static 'images/favicon-3.png' %}"
-                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-{#                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"#}
                   alt="Your Company"
                 /> AI
                 </h1>
@@ -21,7 +19,7 @@
 
 {#                left side of the navbar#}
               <div class="hidden md:block">
-                <div class="flex items-baseline space-x-4 font-medium text-gray-300  text-lg   ml-10  nav">
+                <div class="flex items-baseline space-x-4 font-medium text-gray-300 text-sm  md:text-lg   ml-10  nav">
                     <a
                     href="{% url 'frontend:about' %}"
                     class="px-3 py-2 rounded-md hover:bg-[#012210c4] dark:hover:bg-[#011b0d] hover:text-white transition-colors duration-200  pointer about"
@@ -36,13 +34,13 @@
 {#                  >#}
                     <a
                     href="{% url 'photo_upload_cifar10' %}"
-                    class="px-3 py-2 rounded-md hover:bg-[#012210c4] dark:hover:bg-[#011b0d] hover:text-white transition-colors duration-200 classifier"
+                    class="px-3 py-2 whitespace-nowrap  rounded-md hover:bg-[#012210c4] dark:hover:bg-[#011b0d] hover:text-white transition-colors duration-200 classifier"
                     aria-current="page"
                     >Cifar-10</a
                   >
                      <a
                     href="{% url 'photo_upload_cifar100' %}"
-                    class="px-3 py-2 rounded-md hover:bg-[#012210c4] dark:hover:bg-[#011b0d] hover:text-white transition-colors duration-200 classifier"
+                    class="px-3 py-2 whitespace-nowrap rounded-md hover:bg-[#012210c4] dark:hover:bg-[#011b0d] hover:text-white transition-colors duration-200 classifier"
                     aria-current="page"
                     >Cifar-100</a
                   >
