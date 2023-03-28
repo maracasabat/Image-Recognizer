@@ -2,25 +2,20 @@ import io
 import random
 
 import requests
-from PIL import Image
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from urllib3.packages.six import BytesIO
 
-from .models import Photo, User
+from .models import Photo
 from django.views.generic import TemplateView
 from django.views import View
 from .forms import PhotoForm
 import tensorflow as tf
 from tensorflow import keras
 from keras.models import load_model
-from keras.preprocessing import image
+
 import numpy as np
+from .model.get_model import CIFAR10, CIFAR100
 
-from keras.utils import get_file
-
-CIFAR10 = 'mediauploadapp/model/model_best_V.h5'
-CIFAR100 = 'mediauploadapp/model/best_result_cifar100.h5'
 CIFAR10_CATEGORIES = ['airplane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 CIFAR100_CATEGORIES = ['apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed', 'bee',
                        'beetle', 'bicycle', 'bottle', 'bowl', 'boy', 'bridge', 'bus',
@@ -28,8 +23,8 @@ CIFAR100_CATEGORIES = ['apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed'
                        'chair', 'chimpanzee', 'clock', 'cloud', 'cockroach', 'couch',
                        'crab', 'crocodile', 'cup', 'dinosaur', 'dolphin', 'elephant',
                        'flatfish', 'forest', 'fox', 'girl', 'hamster', 'house',
-                       'kangaroo', 'keyboard', 'lamp', 'lawn_mower', 'leopard', 'lion',
-                       'lizard', 'lobster', 'man', 'maple_tree', 'motorcycle',
+                       'kangaroo', 'keyboard', 'lamp', 'lawn mower', 'leopard', 'lion',
+                       'lizard', 'lobster', 'man', 'maple tree', 'motorcycle',
                        'mountain', 'mouse', 'mushroom', 'oak_tree', 'orange', 'orchid',
                        'otter', 'palm_tree', 'pear', 'pickup_truck', 'pine_tree',
                        'plain', 'plate', 'poppy', 'porcupine', 'possum', 'rabbit',
@@ -52,6 +47,7 @@ def main(request):
 
 
 """ Add methods for the photos upload """
+
 
 @login_required
 def photo_list(request):
@@ -124,7 +120,8 @@ class BasicUploadViewCifar10(View):
 
         predict_pictures = predict_cifar(CIFAR10, self.photo, CIFAR10_CATEGORIES)
 
-        return render(request, 'pages/imageClassifier.html', {'predict_pictures': predict_pictures, 'photo': self.photo})
+        return render(request, 'pages/imageClassifier.html',
+                      {'predict_pictures': predict_pictures, 'photo': self.photo})
 
 
 @login_required
@@ -160,7 +157,8 @@ class BasicUploadViewCifar100(View):
 
         predict_pictures = predict_cifar(CIFAR100, self.photo, CIFAR100_CATEGORIES)
 
-        return render(request, 'pages/imageClassifier.html', {'predict_pictures': predict_pictures, 'photo':self.photo})
+        return render(request, 'pages/imageClassifier.html',
+                      {'predict_pictures': predict_pictures, 'photo': self.photo})
 
 
 @login_required
