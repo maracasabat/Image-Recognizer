@@ -10,14 +10,31 @@
       <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
      {% load static %}
       {% tailwind_css %}
+     <style>
+         input[type=file]::file-selector-button {
+              margin-right: 20px;
+              border: none;
+              background: #012210b3;
+              padding: 10px 20px;
+              border-radius: 10px;
+              color: #fff;
+              cursor: pointer;
+              transition: background .2s ease-in-out;
+            }
+
+            input[type=file]::file-selector-button:hover {
+              background: #012210c4
+}
+     </style>
   </head>
-  <body class="h-full text-bg-gray-600  dark:text-gray-50 bg-gradient-to-br dark:from-[#012210] dark:to-[#009c4c] from-[#9dc9b3] to-white">
+  <body class="h-full text-bg-gray-600  dark:text-gray-50 bg-gradient-to-br dark:from-[#012210] dark:to-[#009c4c] from-[#9dc9b3] to-white overflow-hidden">
     <div class="min-h-screen overflow-auto  ">
           <!--    NAVIGATION-->
   {% include "includes/navigation.html" %}
  {% include 'includes/footer.html' %}
 
-     <!--    HEADER-->
+   <div class="container h-3/4 mx-auto px-4 absolute top-[100px] left-0 right-8  w-full overflow-auto">
+         <!--    HEADER-->
       <header class="container m-auto flex relative flex justify-center items-center py-5 ">
             {% block header %}{% endblock %}
                 {% block title %}{% endblock %}
@@ -34,6 +51,7 @@
 
 
       </main>
+   </div>
     </div>
     <script>
         let links = document.querySelectorAll('.nav a');
