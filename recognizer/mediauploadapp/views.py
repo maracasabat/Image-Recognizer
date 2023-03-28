@@ -11,6 +11,7 @@ from tensorflow import keras
 from keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
+from gpt_index.indices.tree.base import GPTTreeIndex
 
 CIFAR10 = 'mediauploadapp/model/model_best_V.h5'
 CIFAR100 = 'mediauploadapp/model/best_result_cifar100.h5'
@@ -217,3 +218,15 @@ def delete_photo(request, pk):
         file = Photo.objects.get(pk=pk, author_id=request.user)
         file.delete()
     return redirect('photo_upload_cifar10')
+
+
+""" Add Chat bot based on Deep Learning with Python Book """
+@login_required
+def dl_chat_bot(request):
+    index = GPTTreeIndex.load_from_disk('mediauploadapp/model/index.json')
+    prompt = request.GET.get('prompt')
+    if prompt:
+        response = index.query(prompt)
+    else:
+        response = "..."
+    return render(request, 'mediauploadapp/dl_chat_bot.html', {'response': response})

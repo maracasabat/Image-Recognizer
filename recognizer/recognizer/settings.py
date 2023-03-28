@@ -218,3 +218,5 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+OPENAI_API_KEY = os.environ.get(MY_OPENAI_API_KEY)
