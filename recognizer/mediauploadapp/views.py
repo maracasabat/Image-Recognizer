@@ -14,7 +14,11 @@ from tensorflow import keras
 from keras.models import load_model
 
 import numpy as np
+
+from gpt_index.indices.tree.base import GPTTreeIndex
+
 from .model.get_model import CIFAR10, CIFAR100
+
 
 CIFAR10_CATEGORIES = ['airplane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 CIFAR100_CATEGORIES = ['apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed', 'bee',
@@ -220,3 +224,15 @@ def delete_photo(request, pk):
         file = Photo.objects.get(pk=pk, author_id=request.user)
         file.delete()
     return redirect('basic_upload')
+
+
+""" Add Chat bot based on Deep Learning with Python Book """
+@login_required
+def dl_chat_bot(request):
+    index = GPTTreeIndex.load_from_disk('mediauploadapp/model/index.json')
+    prompt = request.GET.get('prompt')
+    if prompt:
+        response = index.query(prompt)
+    else:
+        response = "..."
+    return render(request, 'mediauploadapp/dl_chat_bot.html', {'response': response})

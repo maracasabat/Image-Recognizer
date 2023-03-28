@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-xl mx-auto py-12 px-4">
+        <div class="border border-gray-300 p-6 rounded-lg">
+            <div id="chat-output" class="mb-4">
+                <!-- Messages will be displayed here -->
+            </div>
+            <form id="chat-form">
+                <input id="user-input" type="text" name="prompt" class="rounded-lg border border-gray-300 focus:border-green-500 py-2 px-3">
+                <button type="submit" class="w-auto bg-green-800 bg-green-800 text-white font-bold py-2 px-4 rounded">
+                    Send
+                </button>
+            </form>
+        </div>
+    </div>
+{#    <div id="chatbot-response">{{response}}</div>#}
+    <script>
+        const chatOutput = document.getElementById('chat-output');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const chatbotResponseElement = document.getElementById('chatbot-response');
+        {#chatbotResponseElement.innerHTML = chatbotResponse;#}
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userMessage = userInput.value;
+            userInput.value = '';
+            addMessage(userMessage, 'user');
+            addMessage('{{ response }}', 'chatbot');
+            {#fetch(`/?prompt=${encodeURIComponent(userMessage)}`)#}
+            {#    .then(response => response.json())#}
+            {#    .then(addMessage(response, 'chatbot');#}
+            {#    });#}
+        });
+
+        function addMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('mb-2');
+            if (sender === 'user') {
+                messageElement.innerHTML = `
+                    <div class="bg-gray-100 rounded-lg py-2 px-4 inline-block">
+                        ${message}
+                    </div>
+                `;
+            } else if (sender === 'chatbot') {
+                messageElement.innerHTML = `
+                    <div class="bg-green-200 text-white rounded-lg py-2 px-4 inline-block">
+                        ${message}
+                    </div>
+                `;
+            }
+            chatOutput.appendChild(messageElement);
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
+    </script>
+{% endblock %}
