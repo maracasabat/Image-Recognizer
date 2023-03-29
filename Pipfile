@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+tensorflow = "*"
+psycopg2-binary = "*"
+django-tailwind = "*"
+django-dotenv = "*"
+pillow = "*"
+django-allauth = "*"
+numpy = "*"
+fontawesomefree = "*"
+django-email-users = "*"
+django-crispy-forms = "==1.14"
+django-cloudinary-storage = "*"
+cloudinary = "*"
+gdown = "*"
+gpt-index = "==0.4.40"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
