@@ -57,13 +57,15 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=password
 POSTGRES_HOST=db
 POSTGRES_PORT=5432
+
+OPENAI_API_KEY=OPENAI_API_KEY
 ```
 
 * If you want to use Cloudinary add next steps:
 ```sh
-CLOUD_NAME='cloudinary_NAME'
-API_KEY='cloudinary_KEY'
-API_SECRET='cloudinary_SECRET'
+CLOUD_NAME=cloudinary_NAME
+API_KEY=cloudinary_KEY
+API_SECRET=cloudinary_SECRET
 ```
 * Or you can choose local storage on file settings.py
 
@@ -79,6 +81,7 @@ else:
 First terminal:
 (env)$ cd recognizer
 (env)$ python manage.py migrate
+(env)$ python manage.py tailwind build
 (env)$ python manage.py tailwind start
 ```
 
