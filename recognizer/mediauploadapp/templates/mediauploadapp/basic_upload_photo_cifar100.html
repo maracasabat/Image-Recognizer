@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block title %}
+<div class="flex flex-col justify-center items-center" xmlns="http://www.w3.org/1999/html">
+    <h2 class="text-3xl font-bold mb-5">How it works?</h2>
+    <div class="">
+            <p class=" tracking-wide"> The tool can do even better: classify 100 categories:</p>
+            <details> 'apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed', 'bee',
+               'beetle', 'bicycle', 'bottle', 'bowl', 'boy', 'bridge', 'bus',
+               'butterfly', 'camel', 'can', 'castle', 'caterpillar', 'cattle',
+               'chair', 'chimpanzee', 'clock', 'cloud', 'cockroach', 'couch',
+               'crab', 'crocodile', 'cup', 'dinosaur', 'dolphin', 'elephant',
+               'flatfish', 'forest', 'fox', 'girl', 'hamster', 'house',
+               'kangaroo', 'keyboard', 'lamp', 'lawn_mower', 'leopard', 'lion',
+               'lizard', 'lobster', 'man', 'maple_tree', 'motorcycle',
+               'mountain', 'mouse', 'mushroom', 'oak_tree', 'orange', 'orchid',
+               'otter', 'palm_tree', 'pear', 'pickup_truck', 'pine_tree',
+               'plain', 'plate', 'poppy', 'porcupine', 'possum', 'rabbit',
+               'raccoon', 'ray', 'road', 'rocket', 'rose', 'sea', 'seal',
+               'shark', 'shrew', 'skunk', 'skyscraper', 'snail', 'snake',
+               'spider', 'squirrel', 'streetcar', 'sunflower', 'sweet_pepper',
+               'table', 'tank', 'telephone', 'television', 'tiger', 'tractor',
+               'train', 'trout', 'tulip', 'turtle', 'wardrobe', 'whale',
+               'willow_tree', 'wolf', 'woman', 'worm'</details>
+            <p>Check if our classifier recognized your pictures correctly</p>
+          </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+{% block javascript %}
+    {% load static %}
+  {# JQUERY FILE UPLOAD SCRIPTS #}
+  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+
+{#   PHOTOS PAGE SCRIPTS #}
+  <script src="{% static 'mediauploadapp/js/basic-upload-photo.js' %}"></script>
+{% endblock %}
+
+     {% include 'includes/input.html' %}
+
+<!----------HISTORY---------->
+
+{% block photos_content %}
+
+   {% include 'includes/buttons.html' %}
+
+
+<h2 class="text-3xl font-bold my-5 text-center">History</h2>
+    <div class="container flex flex-wrap items-center justify-center w-full p-4 gap-5">
+    {% for photo in photos %}
+        <div class="bg-[#012210b3] dark:bg-white w-72 pb-4 rounded-3xl shadow-lg overflow-hidden">
+            <div class="flex flex-col items-center justify-center">
+
+{#            {% include 'includes/image.html' %}#}
+
+                <img class="w-full h-[150px] rounded-lg shadow-lg object-cover cursor-pointer" src="{{ photo.file.url }}" alt="{{ photo.file.name }}" onclick="showModal(src)"/>
+                    <div class="mt-1 mb-3 px-4 text-left w-full text-gray-100 dark:text-gray-900">
+                        <h3 class="text-xl font-semibold ">Prediction:</h3>
+                        <p class="mb-2 text-sm text-gray-400 dark:text-gray-900">
+                            {{ photo.file.name }}
+                        </p>
+                    </div>
+            <div class="flex items-center justify-between w-full px-4">
+                <form class="px-3 py-1 bg-green-800 hover:bg-green-900 text-white border rounded-lg capitalize"  method="post" action="{% url 'predict_cifar100_dropdown' photo.pk %}">
+                  {% csrf_token %}
+                  <button type="submit" >
+                  Prediction
+                  </button>
+            </form>
+                <form class="px-3 py-1 bg-red-600 hover:bg-red-800 text-white border rounded-lg capitalize" method="post" action="{% url 'delete_photo_cifar_100' photo.pk %}">
+              {% csrf_token %}
+              <button type="submit" >
+                  Delete
+              </button>
+            </form>
+            </div>
+             </div>
+        </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+
+      <!-- The Modal -->
+    <div id="modal"
+        class="hidden fixed top-0 left-0 z-20 w-screen h-screen bg-black/70 flex justify-center items-center">
+
+        <!-- The close button -->
+        <a class="fixed z-30 top-6 right-8 text-white text-5xl font-bold" href="javascript:void(0)"
+            onclick="closeModal()">&times;</a>
+
+        <!-- A big image will be displayed here -->
+        <img id="modal-img" class="max-w-[800px] max-h-[600px] object-cover" />
+    </div>
+
+    <script>
+        // Get the modal by id
+        var modal = document.getElementById("modal");
+
+        // Get the modal image tag
+        var modalImg = document.getElementById("modal-img");
+
+        // this function is called when a small image is clicked
+        function showModal(src) {
+            modal.classList.remove('hidden');
+            modalImg.src = src;
+        }
+
+        // this function is called when the close button is clicked
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+    </script>
+
+{% endblock %}
