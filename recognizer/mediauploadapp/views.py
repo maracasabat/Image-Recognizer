@@ -19,7 +19,6 @@ from gpt_index.indices.tree.base import GPTTreeIndex
 
 from .model.get_model import CIFAR10, CIFAR100
 
-
 CIFAR10_CATEGORIES = ['airplane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 CIFAR100_CATEGORIES = ['apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed', 'bee',
                        'beetle', 'bicycle', 'bottle', 'bowl', 'boy', 'bridge', 'bus',
@@ -146,7 +145,6 @@ def predict_cifar10_dropdown(request, pk):
     return render(request, 'mediauploadapp/basic_upload_photo_cifar10.html', {'photos': photos_list})
 
 
-
 """ Add methods for CIFAR100 Predictions """
 
 
@@ -192,7 +190,6 @@ def predict_cifar100_dropdown(request, pk):
     return render(request, 'mediauploadapp/basic_upload_photo_cifar100.html', {'photos': photos_list})
 
 
-
 def predict_cifar(best_model, img_url, categories):
     model = load_model(best_model)
 
@@ -225,12 +222,14 @@ def delete_photo_cifar_10(request, pk):
         file.delete()
     return redirect('photo_upload_cifar10')
 
+
 @login_required
 def delete_photo_cifar_100(request, pk):
     if request.method == 'POST':
         file = Photo.objects.get(pk=pk, author_id=request.user)
         file.delete()
     return redirect('photo_upload_cifar100')
+
 
 @login_required
 def delete_photo(request, pk):
@@ -241,13 +240,16 @@ def delete_photo(request, pk):
 
 
 """ Add Chat bot based on Deep Learning with Python Book """
+
+
 @login_required
 def dl_chat_bot(request):
-    # index = GPTTreeIndex.load_from_disk('mediauploadapp/model/index.json')
+    index = GPTTreeIndex.load_from_disk('mediauploadapp/model/index.json')
     prompt = request.GET.get('prompt')
+
     if prompt:
-        pass
-        # response = index.query(prompt)
+        # pass
+        response = index.query(prompt)
     else:
         response = "..."
     return render(request, 'mediauploadapp/dl_chat_bot.html', {'response': response})
