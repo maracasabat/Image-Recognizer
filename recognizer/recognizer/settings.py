@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
-    'dropzone.apps.DropzoneConfig'
     'dropzone.apps.DropzoneConfig',
     'cloudinary_storage',
     'cloudinary',
@@ -187,9 +186,9 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-# NPM_BIN_PATH = '/usr/local/bin/npm'  # MacOS
+NPM_BIN_PATH = '/usr/local/bin/npm'  # MacOS
 
-NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd" # Windows
+# NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd" # Windows
 
 #  Configuring TinyMCE for admin
 
@@ -237,4 +236,4 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
     }
 }
-OPENAI_API_KEY = os.environ['MY_OPENAI_API_KEY']
+OPENAI_API_KEY = os.environ['OPENAI_API_KEY']

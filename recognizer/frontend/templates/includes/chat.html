@@ -2,8 +2,13 @@
 <div class="flex h-screen antialiased text-gray-800">
     <div class="flex flex-row h-full w-full overflow-x-hidden">
       <div class="flex flex-col flex-auto h-2/3 p-6">
-        <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-[#3a5948]/50 dark:bg-[#c4ded1] border border-[#3a5948] shadow h-full p-4">
-          <div id="chat-output" class="flex flex-col h-full overflow-x-auto mb-4">  <!-- Messages will be displayed here --></div>
+        <div class="flex flex-col flex-auto flex-shrink-0 justify-between rounded-2xl bg-[#3a5948]/50 dark:bg-[#c4ded1] border border-[#3a5948] shadow h-full p-4">
+              <!-- Messages will be displayed here -->
+          <div id="chat-output" class="mb-4">
+            <div id="chatbot-response" class="flex flex-col h-full overflow-x-auto mb-4">
+                {{response}}
+            </div>
+          </div>
           <form id="chat-form" class="flex flex-row items-center h-16 rounded-xl bg-[#3a5948] w-full px-4">
             <div class="flex-grow ml-4">
               <div class="relative w-full">
