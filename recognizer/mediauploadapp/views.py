@@ -1,6 +1,6 @@
 import io
 import random
-
+from django.conf import settings
 import requests
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -244,7 +244,7 @@ def delete_photo(request, pk):
 
 @login_required
 def dl_chat_bot(request):
-    index = GPTTreeIndex.load_from_disk('mediauploadapp/model/index.json')
+    index = GPTTreeIndex.load_from_disk(settings.BASE_DIR / 'mediauploadapp/model/index.json')
     prompt = request.GET.get('prompt')
 
     if prompt:
