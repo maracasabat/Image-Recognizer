@@ -15,19 +15,20 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = 'secret_key'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-if not DEBUG:
-    ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOST')]
+ALLOWED_HOSTS = ['*']
+# if not DEBUG:
+#     ALLOWED_HOSTS += [os.environ.get('ALLOWED_HOST')]
 # Application definition
 
 INSTALLED_APPS = [
@@ -188,7 +189,7 @@ INTERNAL_IPS = [
 
 # NPM_BIN_PATH = '/usr/local/bin/npm'  # MacOS
 
-NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd" # Windows
+# NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd" # Windows
 
 #  Configuring TinyMCE for admin
 
@@ -237,3 +238,5 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+CSRF_TRUSTED_ORIGINS = ['https://*.koyeb.app']
