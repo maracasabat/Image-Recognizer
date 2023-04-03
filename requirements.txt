@@ -3,6 +3,7 @@ tensorflow
 psycopg2-binary
 django-tailwind
 django-dotenv
+django-tinymce
 pillow
 django-allauth
 numpy
