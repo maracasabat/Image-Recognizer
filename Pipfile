@@ -19,6 +19,7 @@ django-cloudinary-storage = "*"
 cloudinary = "*"
 gdown = "*"
 gpt-index = "==0.4.40"
+django-tinymce = "*"
 
 [dev-packages]
 
