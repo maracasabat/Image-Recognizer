@@ -30,7 +30,7 @@ Project is mainly based on:
 * The second thing to do is to clone the repository:
 
 ```sh
-$ git clone git@github.com:maracasabat/Image-Recognizer-WEB.git
+$ git clone git@github.com:maracasabat/Image-Recognizer.git
 ```
 
 * Activate virtual environment and install dependencies:
@@ -42,10 +42,6 @@ $ pipenv  shell
 
 * Once `pipenv` has finished downloading the dependencies:
 
-```sh
-(env)$ cd recognizer/frontend/static_src/
-(env)$ npm i
-```
 
 * Create .env file in project root and fill in the file like this example:
 ```sh
@@ -81,6 +77,7 @@ else:
 First terminal:
 (env)$ cd recognizer
 (env)$ python manage.py migrate
+(env)$ python manage.py tailwind install
 (env)$ python manage.py tailwind build
 (env)$ python manage.py tailwind start
 ```
@@ -92,8 +89,39 @@ Second terminal:
 ```
 * And navigate to `http://127.0.0.1:8000/.
 
+## Docker setup
+
+1. Build containers via `docker-compose`:
+
+    ```bash
+    docker-compose build
+    ```
+
+2. Start containers:
+
+    ```bash
+    docker-compose up
+    ```
+
+3. Open `http://localhost:8000` in a browser. You should see the main page.
+
+    ```bash
+    docker pull maracasabat/recognizer-project
+    ```
+
+    ```bash
+    docker run -p 8000:8000 maracasabat/recognizer-project
+    ```
+
+    ```bash
+    https://naai-project-maracasabat.koyeb.app/
+    ```
+
 * Links to the models:
   * **[cifar10](https://drive.google.com/file/d/1-oVU8YGdNXper8XTQCKj5Up67q0PTPFA/view?usp=sharing)**
   * **[cifar100](https://drive.google.com/file/d/1wGkwfOPPQQFDv-Ka8SpX1pJcwo-ks8yx/view?usp=sharing)**
+
+If there are any problems with the models, they can be downloaded from Google Disk and added to `mediauploadapp
+/model/` folder.
 
 
