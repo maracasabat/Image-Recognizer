@@ -1,6 +1,6 @@
 import io
 import random
-
+from django.conf import settings
 import requests
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -12,15 +12,13 @@ from .forms import PhotoForm
 import tensorflow as tf
 from tensorflow import keras
 from keras.models import load_model
-
 import numpy as np
-
 from gpt_index.indices.tree.base import GPTTreeIndex
-
 from .model.get_model import CIFAR10, CIFAR100
 
+
 CIFAR10_CATEGORIES = ['airplane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
-CIFAR100_CATEGORIES = ['apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed', 'bee',
+CIFAR100_CATEGORIES = ['apple', 'aquarium fish', 'baby', 'bear', 'beaver', 'bed', 'bee',
                        'beetle', 'bicycle', 'bottle', 'bowl', 'boy', 'bridge', 'bus',
                        'butterfly', 'camel', 'can', 'castle', 'caterpillar', 'cattle',
                        'chair', 'chimpanzee', 'clock', 'cloud', 'cockroach', 'couch',
@@ -28,15 +26,15 @@ CIFAR100_CATEGORIES = ['apple', 'aquarium_fish', 'baby', 'bear', 'beaver', 'bed'
                        'flatfish', 'forest', 'fox', 'girl', 'hamster', 'house',
                        'kangaroo', 'keyboard', 'lamp', 'lawn mower', 'leopard', 'lion',
                        'lizard', 'lobster', 'man', 'maple tree', 'motorcycle',
-                       'mountain', 'mouse', 'mushroom', 'oak_tree', 'orange', 'orchid',
-                       'otter', 'palm_tree', 'pear', 'pickup_truck', 'pine_tree',
+                       'mountain', 'mouse', 'mushroom', 'oak tree', 'orange', 'orchid',
+                       'otter', 'palm tree', 'pear', 'pickup_truck', 'pine tree',
                        'plain', 'plate', 'poppy', 'porcupine', 'possum', 'rabbit',
                        'raccoon', 'ray', 'road', 'rocket', 'rose', 'sea', 'seal',
                        'shark', 'shrew', 'skunk', 'skyscraper', 'snail', 'snake',
-                       'spider', 'squirrel', 'streetcar', 'sunflower', 'sweet_pepper',
+                       'spider', 'squirrel', 'streetcar', 'sunflower', 'sweet pepper',
                        'table', 'tank', 'telephone', 'television', 'tiger', 'tractor',
                        'train', 'trout', 'tulip', 'turtle', 'wardrobe', 'whale',
-                       'willow_tree', 'wolf', 'woman', 'worm']
+                       'willow tree', 'wolf', 'woman', 'worm']
 
 
 # Create your views here.
@@ -244,7 +242,7 @@ def delete_photo(request, pk):
 
 @login_required
 def dl_chat_bot(request):
-    index = GPTTreeIndex.load_from_disk('mediauploadapp/model/index.json')
+    index = GPTTreeIndex.load_from_disk(settings.BASE_DIR / 'mediauploadapp/model/index.json')
     prompt = request.GET.get('prompt')
 
     if prompt:
